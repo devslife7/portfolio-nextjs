@@ -4,7 +4,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { CloseSVG, LogoSVG, MenuSVG } from "@/public/svgs"
 import { cn } from "@/lib/utils"
-import { navigationLinks } from "@/lib/data/navigationLinks"
+// import { navigationLinks } from "@/lib/data/navigationLinks"
 
 export default function Navbar() {
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
@@ -25,45 +25,45 @@ export default function Navbar() {
     }
   }
 
-  const renderNavLinks = () => {
-    const isActive = (link: string) => (pathname === link ? "text-primary" : "hover:text-gray-400")
-    return navigationLinks.map((link, index) => (
-      <Link
-        key={index}
-        href={link.href}
-        className={`px-0 font-extralight leading-7 transition-all ${isActive(link.href)}`}
-      >
-        {link.label}
-      </Link>
-    ))
-  }
+  // const renderNavLinks = () => {
+  //   const isActive = (link: string) => (pathname === link ? "text-primary" : "hover:text-gray-400")
+  //   return navigationLinks.map((link, index) => (
+  //     <Link
+  //       key={index}
+  //       href={link.href}
+  //       className={`px-0 font-extralight leading-7 transition-all ${isActive(link.href)}`}
+  //     >
+  //       {link.label}
+  //     </Link>
+  //   ))
+  // }
 
-  const renderNavLinksMobile = () => {
-    return (
-      <nav>
-        <ul
-          className={cn(
-            "my-container fixed -top-[100%] left-0 z-10 h-full bg-custom-white py-10 text-center transition-all duration-300 ease-in lg:hidden",
-            { "top-32 ": mobileNavOpen }
-          )}
-        >
-          {navigationLinks.map((link, index) => (
-            <li key={index}>
-              <Link
-                href={link.href}
-                className={cn("block py-7 text-xl", {
-                  "border-spacing-4 border-[3px] border-primary text-primary": pathname === link.href,
-                })}
-                onClick={toggleMobileNavOpen}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    )
-  }
+  // const renderNavLinksMobile = () => {
+  //   return (
+  //     <nav>
+  //       <ul
+  //         className={cn(
+  //           "my-container fixed -top-[100%] left-0 z-10 h-full bg-custom-white py-10 text-center transition-all duration-300 ease-in lg:hidden",
+  //           { "top-32 ": mobileNavOpen }
+  //         )}
+  //       >
+  //         {navigationLinks.map((link, index) => (
+  //           <li key={index}>
+  //             <Link
+  //               href={link.href}
+  //               className={cn("block py-7 text-xl", {
+  //                 "border-spacing-4 border-[3px] border-primary text-primary": pathname === link.href,
+  //               })}
+  //               onClick={toggleMobileNavOpen}
+  //             >
+  //               {link.label}
+  //             </Link>
+  //           </li>
+  //         ))}
+  //       </ul>
+  //     </nav>
+  //   )
+  // }
 
   return (
     <>
@@ -77,7 +77,7 @@ export default function Navbar() {
             </Link>
             <p className="mt-2 break-normal text-sm font-extralight lg:ml-5 lg:hidden">123-456-7890</p>
           </div>
-          <div className="hidden lg:flex lg:gap-x-7">{renderNavLinks()}</div>
+          {/* <div className="hidden lg:flex lg:gap-x-7">{renderNavLinks()}</div> */}
 
           <p className="bg-blue hidden break-normal font-extralight lg:ml-7 lg:block">123-456-7890</p>
           <button className="p-2.5 transition-all lg:hidden" onClick={toggleMobileNavOpen}>
@@ -90,7 +90,7 @@ export default function Navbar() {
           </button>
         </nav>
       </header>
-      {renderNavLinksMobile()}
+      {/* {renderNavLinksMobile()} */}
     </>
   )
 }
