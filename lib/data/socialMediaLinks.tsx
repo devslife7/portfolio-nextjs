@@ -1,19 +1,14 @@
-import { FacebookSVG, InstagramSVG, TwitterSVG, YoutubeSVG } from "@/public/svgs"
+import { GitHubSVG, LinkedInSVG } from "@/public/svgs"
 
 export const socialMediaLinks = [
   {
-    label: "Facebook",
+    label: "GitHub",
     href: "https://www.instagram.com/dsbgeneralconstruction/",
-    icon: <FacebookSVG />,
+    icon: <GitHubSVG />,
   },
   {
-    label: "Instagram",
+    label: "LinkedIn",
     href: "https://www.instagram.com/dsbgeneralconstruction/",
-    icon: <InstagramSVG />,
-  },
-  {
-    label: "Twitter",
-    href: "https://www.instagram.com/dsbgeneralconstruction/",
-    icon: <TwitterSVG />,
+    icon: <LinkedInSVG />,
   },
 ]

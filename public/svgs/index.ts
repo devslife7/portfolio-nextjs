@@ -13,10 +13,8 @@ export { default as CloseSVG } from "./close.svg"
 export { default as PlusSVG } from "./plus.svg"
 export { default as SpinnerSVG } from "./spinner.svg"
 
-export { default as FacebookSVG } from "./socials/facebook.svg"
-export { default as InstagramSVG } from "./socials/instagram.svg"
-export { default as TwitterSVG } from "./socials/twitter.svg"
-export { default as YoutubeSVG } from "./socials/youtube.svg"
+export { default as GitHubSVG } from "./socials/github.svg"
+export { default as LinkedInSVG } from "./socials/linkedin.svg"
 
 export { default as LogoSVG } from "./logo.svg"
 export { default as AttachMediaSVG } from "./attachMedia.svg"
