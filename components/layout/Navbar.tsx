@@ -1,11 +1,20 @@
 "use client"
 import { useEffect, useState } from "react"
-// import { Bars3Icon } from "@heroicons/react/24/outline"
 // import MobileNav from "./MobileNav"
 // import { Link as ScrollLink } from "react-scroll"
 // import NavLinks from "./NavLinks"
 import { cn } from "@/lib/utils"
 import { MenuSVG } from "@/public/svgs"
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
 
 export default function Navbar() {
   const [scrollNav, setScrollNav] = useState(false)
@@ -65,7 +74,35 @@ export default function Navbar() {
             setMobileMenuOpen={setMobileMenuOpen}
           />
         )} */}
+        <MobileNav />
       </header>
     </nav>
+  )
+}
+
+function MobileNav() {
+  return (
+    <Sheet>
+      <SheetTrigger asChild>Open</SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Edit profile</SheetTitle>
+          <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>
+        </SheetHeader>
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            Name
+            <div>input</div>
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <div>Username</div>
+            <div>input</div>
+          </div>
+        </div>
+        <SheetFooter>
+          <SheetClose asChild>button</SheetClose>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   )
 }
