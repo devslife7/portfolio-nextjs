@@ -83,7 +83,9 @@ export default function Navbar() {
 function MobileNav() {
   return (
     <Sheet>
-      <SheetTrigger asChild>Open</SheetTrigger>
+      <SheetTrigger asChild>
+        <div>open here</div>
+      </SheetTrigger>
       <SheetContent>
         <SheetHeader>
           <SheetTitle>Edit profile</SheetTitle>
