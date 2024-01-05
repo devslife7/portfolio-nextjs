@@ -57,24 +57,8 @@ export default function Navbar() {
           </div>
 
           {/* <NavLinks dictionary={dictionary} /> */}
-          <div className="flex lg:hidden">
-            <button
-              type="button"
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
-              onClick={handleMobileMenuOpen}
-            >
-              <span className="sr-only">Open main menu</span>
-              <MenuSVG />
-            </button>
-          </div>
+          <MobileNav />
         </nav>
-        {/* {mobileMenuOpen && (
-          <MobileNav
-            mobileMenuOpen={mobileMenuOpen}
-            setMobileMenuOpen={setMobileMenuOpen}
-          />
-        )} */}
-        <MobileNav />
       </header>
     </nav>
   )
@@ -84,7 +68,7 @@ function MobileNav() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <div>open here</div>
+        <MenuSVG />
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
