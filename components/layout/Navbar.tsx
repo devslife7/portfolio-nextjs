@@ -1,17 +1,15 @@
 "use client"
 import { useEffect, useState } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { CloseSVG, LogoSVG, MenuSVG } from "@/public/svgs"
+// import { Bars3Icon } from "@heroicons/react/24/outline"
+// import MobileNav from "./MobileNav"
+// import { Link as ScrollLink } from "react-scroll"
+// import NavLinks from "./NavLinks"
 import { cn } from "@/lib/utils"
-// import { navigationLinks } from "@/lib/data/navigationLinks"
+import { MenuSVG } from "@/public/svgs"
 
 export default function Navbar() {
-  const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [scrollNav, setScrollNav] = useState(false)
-  const pathname = usePathname()
-
-  const toggleMobileNavOpen = () => setMobileNavOpen(!mobileNavOpen)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     window.addEventListener("scroll", changeNav)
@@ -25,72 +23,49 @@ export default function Navbar() {
     }
   }
 
-  // const renderNavLinks = () => {
-  //   const isActive = (link: string) => (pathname === link ? "text-primary" : "hover:text-gray-400")
-  //   return navigationLinks.map((link, index) => (
-  //     <Link
-  //       key={index}
-  //       href={link.href}
-  //       className={`px-0 font-extralight leading-7 transition-all ${isActive(link.href)}`}
-  //     >
-  //       {link.label}
-  //     </Link>
-  //   ))
-  // }
-
-  // const renderNavLinksMobile = () => {
-  //   return (
-  //     <nav>
-  //       <ul
-  //         className={cn(
-  //           "my-container fixed -top-[100%] left-0 z-10 h-full bg-custom-white py-10 text-center transition-all duration-300 ease-in lg:hidden",
-  //           { "top-32 ": mobileNavOpen }
-  //         )}
-  //       >
-  //         {navigationLinks.map((link, index) => (
-  //           <li key={index}>
-  //             <Link
-  //               href={link.href}
-  //               className={cn("block py-7 text-xl", {
-  //                 "border-spacing-4 border-[3px] border-primary text-primary": pathname === link.href,
-  //               })}
-  //               onClick={toggleMobileNavOpen}
-  //             >
-  //               {link.label}
-  //             </Link>
-  //           </li>
-  //         ))}
-  //       </ul>
-  //     </nav>
-  //   )
-  // }
+  const handleMobileMenuOpen = () => {
+    setMobileMenuOpen(true)
+  }
 
   return (
-    <>
-      <div className="h-32"></div>
-      <header className="fixed top-0 z-20 w-full bg-custom-white transition-all duration-300 ease-in-out">
-        <nav className=" my-container flex h-32 items-center justify-between">
-          <div className="mt-6 lg:mt-0 lg:flex-1">
-            <Link href="/" className="text-xl font-semibold leading-none opacity-80">
-              <LogoSVG className="mb-2 mr-2 inline-block text-3xl text-primary" />
-              <span className="text-primary">DSB</span> General Construction
-            </Link>
-            <p className="mt-2 break-normal text-sm font-extralight lg:ml-5 lg:hidden">123-456-7890</p>
+    <nav>
+      <header
+        //change scrollNav to tailwind animations?
+        className={cn(
+          "fixed bg-black bg-opacity-50 top-0 z-10 w-full text-white transition-all duration-300 ease-in-out",
+          {
+            "bg-secondary bg-opacity-100": scrollNav,
+          }
+        )}
+      >
+        <nav className="flex items-center justify-between h-16 my-container">
+          <div className="flex items-center lg:flex-1">
+            {/* <ScrollLink to="hero"> */}
+            <span className="text-2xl font-semibold">
+              Portfo<span className="text-primary">lio</span>
+            </span>
+            {/* </ScrollLink> */}
           </div>
-          {/* <div className="hidden lg:flex lg:gap-x-7">{renderNavLinks()}</div> */}
 
-          <p className="bg-blue hidden break-normal font-extralight lg:ml-7 lg:block">123-456-7890</p>
-          <button className="p-2.5 transition-all lg:hidden" onClick={toggleMobileNavOpen}>
-            <span className="sr-only">Open main menu</span>
-            {mobileNavOpen ? (
-              <CloseSVG className="text-3xl opacity-80 aria-pressed:bg-red-300" />
-            ) : (
-              <MenuSVG className="text-3xl opacity-80" />
-            )}
-          </button>
+          {/* <NavLinks dictionary={dictionary} /> */}
+          <div className="flex lg:hidden">
+            <button
+              type="button"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
+              onClick={handleMobileMenuOpen}
+            >
+              <span className="sr-only">Open main menu</span>
+              <MenuSVG />
+            </button>
+          </div>
         </nav>
+        {/* {mobileMenuOpen && (
+          <MobileNav
+            mobileMenuOpen={mobileMenuOpen}
+            setMobileMenuOpen={setMobileMenuOpen}
+          />
+        )} */}
       </header>
-      {/* {renderNavLinksMobile()} */}
-    </>
+    </nav>
   )
 }
