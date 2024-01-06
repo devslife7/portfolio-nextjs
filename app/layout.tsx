@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Ubuntu, Poppins } from "next/font/google"
 import "./globals.css"
 import Navbar from "@/components/layout/Navbar"
 import Footer from "@/components/layout/Footer"
 
 const inter = Inter({ subsets: ["latin"] })
+const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["300", "400", "500", "700"] })
+const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400", "600", "700"] })
 
 export const metadata: Metadata = {
   title: "Marcos' Portfolio",
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={ubuntu.className}>
         <Navbar />
         {children}
         <Footer />

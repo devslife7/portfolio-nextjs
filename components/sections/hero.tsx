@@ -1,5 +1,4 @@
 "use client"
-import React, { useState } from "react"
 import Typewriter from "typewriter-effect"
 import { Link as ScrollLink } from "react-scroll"
 import Image from "next/image"
