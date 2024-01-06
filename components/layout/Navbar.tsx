@@ -55,7 +55,7 @@ export default function Navbar() {
         )}
       >
         <nav className="flex items-center justify-between h-16 my-container">
-          <ScrollLink smooth duration={300} to="home" className="text-2xl font-semibold">
+          <ScrollLink smooth duration={300} to="home" className="text-2xl font-semibold cursor-pointer">
             Portfo<span className="text-primary">lio</span>
           </ScrollLink>
 
@@ -71,13 +71,12 @@ function MobileNav() {
   return (
     <Sheet>
       <SheetTrigger>
-        <div className="cursor-pointer sm:hidden">
+        <div className="cursor-pointer sm:hidden p-2">
           <MenuSVG />
         </div>
       </SheetTrigger>
-      <SheetContent className="flex flex-col pt-12 gap-0 text-center bg-black text-white">
-        <NavLinks className="py-5" />
-        <SheetClose></SheetClose>
+      <SheetContent className="flex flex-col pt-20 gap-0 text-center bg-black text-white">
+        <NavLinks className="py-5 w-full text-2xl" />
       </SheetContent>
     </Sheet>
   )
@@ -93,12 +92,12 @@ function NavLinks({ className }: { className?: string }) {
         smooth
         spy
         offset={-64}
+        // onClick={onClick}
         className={cn(
-          "leading-7 transition-all ease-in duration-200 relative cursor-pointer hover:opacity-50 [&.active]:text-primary [&.active]:hover:opacity-100 overflow-hidden [&>span]:[&.active]:inline-block [&>span]:[&.active]:translate-x-8",
-          className
+          "leading-7 transition-all ease-in duration-200 relative cursor-pointer hover:opacity-50 [&.active]:text-primary [&.active]:hover:opacity-100 overflow-hidden [&>span]:[&.active]:inline-block [&>span]:[&.active]:translate-x-8"
         )}
       >
-        {link}
+        <SheetClose className={className}>{link}</SheetClose>
       </ScrollLink>
     )
   })
