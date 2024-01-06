@@ -75,6 +75,10 @@
   }
 }
 
+body {
+  scroll-behavior: smooth;
+}
+
 .my-container {
   @apply container mx-auto px-4 lg:px-8;
 }

@@ -1,24 +1,16 @@
 "use client"
 import { useEffect, useState } from "react"
-// import MobileNav from "./MobileNav"
-// import { Link as ScrollLink } from "react-scroll"
+import { Link as ScrollLink } from "react-scroll"
+// import { Link } from "react-scroll"
 // import NavLinks from "./NavLinks"
 import { cn } from "@/lib/utils"
 import { MenuSVG } from "@/public/svgs"
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet"
+import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+
+const navLinks = ["Home", "Projects", "Skills", "About", "Contact"]
 
 export default function Navbar() {
   const [scrollNav, setScrollNav] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     window.addEventListener("scroll", changeNav)
@@ -32,8 +24,14 @@ export default function Navbar() {
     }
   }
 
-  const handleMobileMenuOpen = () => {
-    setMobileMenuOpen(true)
+  const renderNavLinks = () => {
+    return navLinks.map((link, i) => {
+      return (
+        <ScrollLink key={i} to={link.toLowerCase()} smooth duration={300}>
+          {link}
+        </ScrollLink>
+      )
+    })
   }
 
   return (
@@ -43,21 +41,17 @@ export default function Navbar() {
         className={cn(
           "fixed bg-black bg-opacity-50 top-0 z-10 w-full text-white transition-all duration-300 ease-in-out",
           {
-            "bg-secondary bg-opacity-100": scrollNav,
+            "bg-black bg-opacity-100": scrollNav,
           }
         )}
       >
-        <nav className="flex items-center justify-between h-16 my-container">
-          <div className="flex items-center lg:flex-1">
-            {/* <ScrollLink to="hero"> */}
-            <span className="text-2xl font-semibold">
-              Portfo<span className="text-primary">lio</span>
-            </span>
-            {/* </ScrollLink> */}
-          </div>
+        <nav className="flex items-center justify-between h-16 my-container bg-pink-400">
+          <ScrollLink smooth duration={300} to="home" className="text-2xl font-semibold">
+            Portfo<span className="text-primary">lio</span>
+          </ScrollLink>
 
-          {/* <NavLinks dictionary={dictionary} /> */}
           <MobileNav />
+          <div className="hidden sm:block space-x-8">{renderNavLinks()}</div>
         </nav>
       </header>
     </nav>
@@ -67,27 +61,23 @@ export default function Navbar() {
 function MobileNav() {
   return (
     <Sheet>
-      <SheetTrigger asChild>
-        <MenuSVG />
-      </SheetTrigger>
-      <SheetContent>
-        <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>Make changes to your profile here. Click save when you're done.</SheetDescription>
-        </SheetHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            Name
-            <div>input</div>
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <div>Username</div>
-            <div>input</div>
-          </div>
+      <SheetTrigger className="bg-green-400">
+        <div className="cursor-pointer sm:hidden bg-yellow-400">
+          <MenuSVG />
         </div>
-        <SheetFooter>
-          <SheetClose asChild>button</SheetClose>
-        </SheetFooter>
+      </SheetTrigger>
+      <SheetContent className="bg-yellow-500">
+        {/* <SheetHeader>
+          <SheetTitle>Menu</SheetTitle>
+        </SheetHeader> */}
+        <ul className="my-8 bg-blue-300 text-center w-full">
+          <li>Home</li>
+          <li>Projects</li>
+          <li>Skills</li>
+          <li>About</li>
+          <li>Contact</li>
+        </ul>
+        <SheetClose></SheetClose>
       </SheetContent>
     </Sheet>
   )
