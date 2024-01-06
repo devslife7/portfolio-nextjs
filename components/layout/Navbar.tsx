@@ -27,7 +27,16 @@ export default function Navbar() {
   const renderNavLinks = () => {
     return navLinks.map((link, i) => {
       return (
-        <ScrollLink key={i} to={link.toLowerCase()} smooth duration={300}>
+        <ScrollLink
+          key={i}
+          duration={300}
+          to={link.toLowerCase()}
+          smooth
+          spy
+          offset={-64}
+          className="leading-7 transition-all ease-in duration-200 relative cursor-pointer hover:opacity-50
+          [&.active]:text-primary [&.active]:hover:opacity-100 overflow-hidden [&>span]:[&.active]:inline-block [&>span]:[&.active]:translate-x-8"
+        >
           {link}
         </ScrollLink>
       )
@@ -45,7 +54,7 @@ export default function Navbar() {
           }
         )}
       >
-        <nav className="flex items-center justify-between h-16 my-container bg-pink-400">
+        <nav className="flex items-center justify-between h-16 my-container">
           <ScrollLink smooth duration={300} to="home" className="text-2xl font-semibold">
             Portfo<span className="text-primary">lio</span>
           </ScrollLink>
@@ -61,24 +70,36 @@ export default function Navbar() {
 function MobileNav() {
   return (
     <Sheet>
-      <SheetTrigger className="bg-green-400">
-        <div className="cursor-pointer sm:hidden bg-yellow-400">
+      <SheetTrigger>
+        <div className="cursor-pointer sm:hidden">
           <MenuSVG />
         </div>
       </SheetTrigger>
-      <SheetContent className="bg-yellow-500">
-        {/* <SheetHeader>
-          <SheetTitle>Menu</SheetTitle>
-        </SheetHeader> */}
-        <ul className="my-8 bg-blue-300 text-center w-full">
-          <li>Home</li>
-          <li>Projects</li>
-          <li>Skills</li>
-          <li>About</li>
-          <li>Contact</li>
-        </ul>
+      <SheetContent className="flex flex-col pt-12 gap-0 text-center bg-black text-white">
+        <NavLinks className="py-5" />
         <SheetClose></SheetClose>
       </SheetContent>
     </Sheet>
   )
+}
+
+function NavLinks({ className }: { className?: string }) {
+  return navLinks.map((link, i) => {
+    return (
+      <ScrollLink
+        key={i}
+        duration={300}
+        to={link.toLowerCase()}
+        smooth
+        spy
+        offset={-64}
+        className={cn(
+          "leading-7 transition-all ease-in duration-200 relative cursor-pointer hover:opacity-50 [&.active]:text-primary [&.active]:hover:opacity-100 overflow-hidden [&>span]:[&.active]:inline-block [&>span]:[&.active]:translate-x-8",
+          className
+        )}
+      >
+        {link}
+      </ScrollLink>
+    )
+  })
 }

@@ -6,10 +6,21 @@ export default function Home() {
     <>
       <Navbar />
       <div id="home" className="h-screen bg-blue-300">
-        full page
+        Home
       </div>
-      <div className="h-screen bg-blue-300">full page</div>
-      {/* <Footer /> */}
+      <div id="projects" className="h-screen bg-red-300">
+        Projects
+      </div>
+      <div id="skills" className="h-screen bg-yellow-300">
+        Skills
+      </div>
+      <div id="about" className="h-screen bg-green-300">
+        About
+      </div>
+      <div id="contact" className="h-screen bg-purple-500-300">
+        Contact
+      </div>
+      <Footer />
     </>
   )
 }
