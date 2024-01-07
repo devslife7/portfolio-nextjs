@@ -2,41 +2,13 @@
 import Typewriter from "typewriter-effect"
 import { Link as ScrollLink } from "react-scroll"
 import Image from "next/image"
-import { buttonStyles } from "../ui/button"
+import { buttonStyles } from "../../ui/button"
 import { DownSVG } from "@/public/svgs"
 import Link from "next/link"
 
 import { socialMediaLinks } from "@/lib/data/socialMediaLinks"
 
 export default function Hero() {
-  // const [hover, setHover] = useState(false)
-  // const [themeColor, setThemeColor] = useState("--color-orange")
-
-  // const handleChangeThemeColor = color => {
-  //   const body = document.getElementsByTagName("BODY")[0]
-  //   body.style.setProperty("--color-primary", `var(${color})`)
-  //   setThemeColor(color)
-  // }
-
-  // useEffect(() => {
-  //   const storageThemeColor = localStorage.getItem("theme-color")
-
-  //   if (storageThemeColor) {
-  //     handleChangeThemeColor(storageThemeColor)
-  //   } else {
-  //     handleChangeThemeColor("--color-orange")
-  //   }
-  // }, [])
-
-  // const onHover = () => {
-  //   setHover(!hover)
-  // }
-
-  // const handleThemeChange = e => {
-  //   handleChangeThemeColor(e.target.id)
-  //   localStorage.setItem("theme-color", `${e.target.id}`)
-  // }
-
   const renderSocialLinks = () => {
     return socialMediaLinks.map((link, index) => (
       <Link
@@ -53,7 +25,7 @@ export default function Hero() {
   }
 
   return (
-    <div className="relative h-screen bg-black/60">
+    <div id="home" className="relative h-screen bg-black/60">
       <Image
         src="/hero-background.jpg"
         fill
@@ -82,12 +54,12 @@ export default function Hero() {
             />
           </span>
         </div>
-        <div className="flex gap-4 mb-8">{renderSocialLinks()}</div>
+        <div className="flex gap-6 mb-8">{renderSocialLinks()}</div>
         <div className="home__btnWrapper">
-          <ScrollLink className={buttonStyles()} to="projects" smooth="true" duration={500} spy offset={-64}>
+          {/* <ScrollLink className={buttonStyles()} to="projects" smooth="true" duration={500} spy offset={-64}>
             <div>My Projects</div>
             <DownSVG />
-          </ScrollLink>
+          </ScrollLink> */}
         </div>
       </div>
     </div>

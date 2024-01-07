@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils"
 import { MenuSVG } from "@/public/svgs"
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 
-const navLinks = ["Hero", "Projects", "Skills", "About", "Contact"]
+const navLinks = ["Home", "Projects", "Skills", "About", "Contact"]
 
 export default function Navbar() {
   const [scrollNav, setScrollNav] = useState(false)
