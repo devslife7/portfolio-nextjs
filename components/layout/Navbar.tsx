@@ -33,7 +33,7 @@ export default function Navbar() {
           spy
           offset={-64}
           className="leading-7 transition-all ease-in duration-200 relative cursor-pointer hover:opacity-50
-          [&.active]:text-primary [&.active]:hover:opacity-100 overflow-hidden [&>span]:[&.active]:inline-block [&>span]:[&.active]:translate-x-8"
+          [&.active]:text-primary text-lg [&.active]:hover:opacity-100 overflow-hidden [&>span]:[&.active]:inline-block [&>span]:[&.active]:translate-x-8"
         >
           {link}
         </ScrollLink>
@@ -42,30 +42,23 @@ export default function Navbar() {
   }
 
   return (
-    <div>
-      <nav>
-        <header
-          className={cn(
-            "fixed bg-black bg-opacity-50 top-0 z-10 w-full text-white transition-all duration-300 ease-in-out",
-            {
-              "bg-black bg-opacity-100": scrollNav,
-            }
-          )}
-        >
-          <div className="flex items-center justify-between h-16 my-container">
-            <ScrollLink smooth duration={300} to="home" className="text-2xl font-semibold cursor-pointer">
-              Portfo<span className="text-primary">lio</span>
-            </ScrollLink>
-            <MobileNav />
-            <div className="hidden sm:block space-x-8">{renderNavLinks()}</div>
-          </div>
-        </header>
-      </nav>
-    </div>
+    <nav
+      className={cn("fixed bg-black/0 top-0 z-10 w-full text-white transition-all duration-300 ease-in-out", {
+        "bg-black bg-opacity-100": scrollNav,
+      })}
+    >
+      <div className="flex items-center justify-between h-16 my-container">
+        <ScrollLink smooth duration={300} to="home" className="text-2xl font-semibold cursor-pointer">
+          Portfo<span className="text-primary">lio</span>
+        </ScrollLink>
+        <MobileSideBar />
+        <div className="hidden sm:block space-x-8">{renderNavLinks()}</div>
+      </div>
+    </nav>
   )
 }
 
-function MobileNav() {
+function MobileSideBar() {
   return (
     <Sheet>
       <SheetTrigger>

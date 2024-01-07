@@ -1,13 +1,9 @@
-// import Typewriter from "typewriter-effect"
-// import { Link as ScrollLink } from "react-scroll"
 import Image from "next/image"
-// import { buttonStyles } from "../../ui/button"
-// import { DownSVG } from "@/public/svgs"
 import Link from "next/link"
 
 import { socialMediaLinks } from "@/lib/data/socialMediaLinks"
-import MyTypewriter from "./mytypewirter"
-import CallToAction from "./calltoaction"
+import MyTypewriter from "./MyTypewriter"
+import CallToAction from "./CallToAction"
 
 export default function Hero() {
   const renderSocialLinks = () => {
@@ -44,26 +40,11 @@ export default function Hero() {
         <div className="flex text-4xl mb-8">
           <p>I'm a </p>
           <span className="ml-2 text-primary">
-            {/* <Typewriter
-              options={{
-                strings: ["Web Designer", "Full Stack Developer", "Freelancer"],
-                autoStart: true,
-                loop: true,
-                delay: 50,
-                deleteSpeed: 30,
-              }}
-            /> */}
             <MyTypewriter />
           </span>
         </div>
         <div className="flex gap-6 mb-8">{renderSocialLinks()}</div>
-        <div className="home__btnWrapper">
-          {/* <ScrollLink className={buttonStyles()} to="projects" smooth="true" duration={500} spy offset={-64}>
-            <div>My Projects</div>
-            <DownSVG />
-          </ScrollLink> */}
-          <CallToAction />
-        </div>
+        <CallToAction />
       </div>
     </div>
   )
