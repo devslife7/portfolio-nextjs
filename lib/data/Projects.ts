@@ -8,6 +8,7 @@ export const futFriendsObj = {
   description: "Look up popular upcoming matches and create watchparties with your friends.",
   projectLink: "https://main.d3kudh92mvp4u8.amplifyapp.com/",
   projectGif: "https://media.giphy.com/media/HeeRZi4hagLEl3qPIY/giphy.gif",
+  projectGitHub: "https://github.com/devslife7/FutHub",
 
   techStack: ["React JS", "Redux", "Ruby on Rails", "Postgresql", "Material UI"],
   hosting: ["Railway", "AWS"],
@@ -23,25 +24,27 @@ export const proTaskObj = {
   description: "Helps your teams to organize, track, and manage their work.",
   projectLink: "https://main.d18y87fht79wtx.amplifyapp.com/",
   projectGif: "https://media.giphy.com/media/0amLFjL4e8V4c05NBH/giphy.gif",
+  projectGitHub: "https://github.com/devslife7/taskManager",
 
   techStack: ["React JS", "Redux", "Ruby on Rails", "Postgresql", "Material UI"],
   hosting: ["Railway", "AWS"],
   live: true,
 }
-// export const triviappObj = {
-//   name: 'TriviApp',
-//   darkTheme: true,
-//   flipped: false,
+export const triviappObj = {
+  name: "TriviApp",
+  darkTheme: true,
+  flipped: false,
 
-//   topLine: 'React, Redux, Material UI',
-//   description: 'Play a game of Trivia solo or with your friends.',
-//   projectLink: 'https://steemitimages.com/DQmNUbQja94BzGPUfFxx8HZJFEERfNQ8CQ8GmAGN1miDpvh/Coming-Soon.png',
-//   projectGif: 'https://media.giphy.com/media/X1wSXy6At9dGcodECs/giphy.gif',
+  topLine: "React, Redux, Material UI",
+  description: "Play a game of Trivia solo or with your friends.",
+  projectLink: "https://steemitimages.com/DQmNUbQja94BzGPUfFxx8HZJFEERfNQ8CQ8GmAGN1miDpvh/Coming-Soon.png",
+  projectGif: "https://media.giphy.com/media/X1wSXy6At9dGcodECs/giphy.gif",
+  projectGitHub: "",
 
-//   techStack: ['React JS', 'Ruby on Rails', 'Postgresql', 'Material UI'],
-//   hosting: ['Heroku'],
-//   live: false,
-// }
+  techStack: ["React JS", "Ruby on Rails", "Postgresql", "Material UI"],
+  hosting: ["Heroku"],
+  live: false,
+}
 export const qatar2022 = {
   name: "Qatar 2022",
   darkTheme: true,
@@ -53,6 +56,8 @@ export const qatar2022 = {
   projectLink: "https://main.d311px3iblll1g.amplifyapp.com/",
   projectGif:
     "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE3MGMxOWE1ZWM3MmVjNjJlYzcwZmNmMTJlOTA2ZDdjODVlNDk2YyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/iRTgPcLFK51zGgoUvw/giphy.gif",
+
+  projectGitHub: "https://github.com/devslife7/qatar2022",
 
   techStack: ["React JS", "Javascript", "API-FOOTBALL"],
   hosting: ["AWS Amplify"],
