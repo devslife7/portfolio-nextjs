@@ -9,7 +9,7 @@ export default function Hero() {
     return socialMediaLinks.map((link, index) => (
       <Link
         key={index}
-        className="hover:text-primary ml-4"
+        className="hover:text-primary md:ml-4"
         href={link.href}
         target="_blank"
         rel="noopener noreferrer"
@@ -32,15 +32,15 @@ export default function Hero() {
       />
 
       <div className="w-full flex flex-col justify-center h-screen text-white my-container">
-        <div className="text-3xl mb-4">
-          Hello<span className="text-primary">,</span> my name is
+        <div className="text-lg md:text-3xl mb-4">
+          <span className="text-primary">Hello 👋</span>, my name is
         </div>
-        <div className="text-8xl font-semibold mb-4">Marcos Velasco</div>
-        <div className="flex text-5xl mb-10 space-x-3">
+        <div className="text-5xl md:text-8xl font-semibold mb-4">Marcos Velasco</div>
+        <div className="flex text-3xl md:text-5xl font-medium mb-5 md:mb-10 space-x-3">
           <p>I'm a </p>
           <MyTypewriter />
         </div>
-        <div className="flex gap-6 mb-10">{renderSocialLinks()}</div>
+        <div className="flex gap-6 mb-5 md:mb-10">{renderSocialLinks()}</div>
         <CallToAction />
       </div>
     </div>
