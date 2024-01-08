@@ -9,7 +9,7 @@ export const futFriendsObj = {
   projectLink: "https://main.d3kudh92mvp4u8.amplifyapp.com/",
   projectGif: "https://media.giphy.com/media/HeeRZi4hagLEl3qPIY/giphy.gif",
 
-  technologies: ["React JS", "Redux", "Ruby on Rails", "Postgresql", "Material UI"],
+  techStack: ["React JS", "Redux", "Ruby on Rails", "Postgresql", "Material UI"],
   hosting: ["Railway", "AWS"],
   live: true,
 }
@@ -24,7 +24,7 @@ export const proTaskObj = {
   projectLink: "https://main.d18y87fht79wtx.amplifyapp.com/",
   projectGif: "https://media.giphy.com/media/0amLFjL4e8V4c05NBH/giphy.gif",
 
-  technologies: ["React JS", "Redux", "Ruby on Rails", "Postgresql", "Material UI"],
+  techStack: ["React JS", "Redux", "Ruby on Rails", "Postgresql", "Material UI"],
   hosting: ["Railway", "AWS"],
   live: true,
 }
@@ -38,7 +38,7 @@ export const proTaskObj = {
 //   projectLink: 'https://steemitimages.com/DQmNUbQja94BzGPUfFxx8HZJFEERfNQ8CQ8GmAGN1miDpvh/Coming-Soon.png',
 //   projectGif: 'https://media.giphy.com/media/X1wSXy6At9dGcodECs/giphy.gif',
 
-//   technologies: ['React JS', 'Ruby on Rails', 'Postgresql', 'Material UI'],
+//   techStack: ['React JS', 'Ruby on Rails', 'Postgresql', 'Material UI'],
 //   hosting: ['Heroku'],
 //   live: false,
 // }
@@ -54,7 +54,7 @@ export const qatar2022 = {
   projectGif:
     "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE3MGMxOWE1ZWM3MmVjNjJlYzcwZmNmMTJlOTA2ZDdjODVlNDk2YyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/iRTgPcLFK51zGgoUvw/giphy.gif",
 
-  technologies: ["React JS", "Javascript", "API-FOOTBALL"],
+  techStack: ["React JS", "Javascript", "API-FOOTBALL"],
   hosting: ["AWS Amplify"],
   live: true,
 }
@@ -69,7 +69,7 @@ export const qatar2022 = {
 //   projectLink: 'https://netflix-clone-1e91f.web.app/',
 //   projectGif: 'https://media.giphy.com/media/5nVrXkCH2dwi0ZrzmR/giphy.gif',
 
-//   technologies: ['React JS', 'CSS', 'Movie API'],
+//   techStack: ['React JS', 'CSS', 'Movie API'],
 //   hosting: ['Firebase'],
 //   live: true,
 // }
