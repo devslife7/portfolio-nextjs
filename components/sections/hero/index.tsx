@@ -37,7 +37,7 @@ export default function Hero() {
         </div>
         <div className="text-5xl md:text-8xl font-semibold mb-4">Marcos Velasco</div>
         <div className="flex text-3xl md:text-5xl font-medium mb-5 md:mb-10 space-x-3">
-          <p>I'm a </p>
+          <p>I&apos;m a </p>
           <MyTypewriter />
         </div>
         <div className="flex gap-6 mb-5 md:mb-10">{renderSocialLinks()}</div>

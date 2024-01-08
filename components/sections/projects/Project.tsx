@@ -23,17 +23,19 @@ export default function Project(props: any) {
   const renderBadge = (list: string[]) => {
     return (
       <div className="flex flex-wrap gap-3 font-thin">
-        {list.map((tech: any) => (
-          <div className="bg-primary-900 px-3 text-primary-100 rounded-full">{tech}</div>
+        {list.map((tech: string, idx: number) => (
+          <div key={idx} className="bg-primary-900 px-3 text-primary-100 rounded-full">
+            {tech}
+          </div>
         ))}
       </div>
     )
   }
 
   const renderKeyPoints = () => {
-    return keyPoints?.map((point: any) => {
+    return keyPoints?.map((point: string, idx: number) => {
       return (
-        <div className={cn("opacity-90 ", { "text-black/70": lightTheme })}>
+        <div key={idx} className={cn("opacity-90 ", { "text-black/70": lightTheme })}>
           <span>&#183;</span> {point}
         </div>
       )
@@ -86,7 +88,7 @@ export default function Project(props: any) {
           </div>
         </div>
         <div className={cn("w-full max-w-[700px]", { "max-w-[300px] m-auto": mobile })}>
-          <img src={projectGif} className="h-full w-full object-contain " />
+          <img src={projectGif} className="h-full w-full object-contain" alt="Project image" />
         </div>
       </div>
     </div>
