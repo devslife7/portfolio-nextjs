@@ -21,7 +21,7 @@ export default function Hero() {
   }
 
   return (
-    <div id="home" className="relative h-screen bg-black/70">
+    <section id="home" className="relative h-screen bg-black/70">
       <Image
         src="/hero-background.jpg"
         fill
@@ -43,6 +43,6 @@ export default function Hero() {
         <div className="flex gap-6 mb-5 md:mb-10">{renderSocialLinks()}</div>
         <CallToAction />
       </div>
-    </div>
+    </section>
   )
 }
