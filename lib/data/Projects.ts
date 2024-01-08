@@ -1,10 +1,9 @@
 export const dsbConstruction = {
-  name: "DSB General Construction",
-  darkTheme: true,
+  title: "DSB General Construction",
+  lightTheme: false,
   flipped: false,
   mobile: false,
 
-  topLine: "React, Redux, Material UI",
   description: "Look up popular upcoming matches and create watchparties with your friends.",
   keyPoints: [
     "Modeled custom database schema and REST API.",
@@ -21,12 +20,11 @@ export const dsbConstruction = {
   live: true,
 }
 export const cdcDayCare = {
-  name: "CDC DayCare",
-  darkTheme: false,
+  title: "CDC DayCare",
+  lightTheme: true,
   flipped: true,
   mobile: false,
 
-  topLine: "React, Redux, Material UI",
   description: "Look up popular upcoming matches and create watchparties with your friends.",
   keyPoints: [
     "Modeled custom database schema and REST API.",
@@ -43,12 +41,11 @@ export const cdcDayCare = {
   live: true,
 }
 export const futFriendsObj = {
-  name: "FutFriends",
-  darkTheme: true,
+  title: "FutFriends",
+  lightTheme: false,
   flipped: false,
   mobile: false,
 
-  topLine: "React, Redux, Material UI",
   description: "Look up popular upcoming matches and create watchparties with your friends.",
   keyPoints: [
     "Modeled custom database schema and REST API.",
@@ -65,18 +62,16 @@ export const futFriendsObj = {
   live: true,
 }
 export const proTaskObj = {
-  name: "proTaskr",
-  darkTheme: false,
+  title: "proTaskr",
+  lightTheme: true,
   flipped: true,
   mobile: false,
 
-  topLine: "React, Redux, Material UI",
   description: "Helps your teams to organize, track, and manage their work.",
   keyPoints: [
+    "Developed Full CRUD integration for milestones, projects, tasks and entries.",
     "Utilized JSON Web Tokens for secure user login.",
     "Modeled custom database schema and REST API.",
-    "Designed user interaction flow by architecting its API and integrating multi user interactions.",
-    "Build client routes and developed user interface features using React and Redux.",
   ],
 
   projectLink: "https://main.d18y87fht79wtx.amplifyapp.com/",
@@ -88,15 +83,15 @@ export const proTaskObj = {
   live: true,
 }
 export const qatar2022 = {
-  name: "Qatar 2022",
-  darkTheme: true,
+  title: "Qatar 2022",
+  lightTheme: false,
   flipped: false,
   mobile: true,
 
   description:
     "Track who is winning at Qatar World Cup 2022. A tracking website that helps my friends and I see who is winning. Official results update in real time thanks to the integration of API-FOOTBALL.",
   keyPoints: [
-    "*Over 120 visits per day while tournament lasted.*",
+    "*Over 120 visits per day while tourtitlent lasted.*",
     "Developed Mobile First.",
     "Modeled custom database schema and REST API.",
   ],
@@ -111,11 +106,10 @@ export const qatar2022 = {
   live: true,
 }
 // export const triviappObj = {
-//   name: "TriviApp",
-//   darkTheme: true,
+//   title: "TriviApp",
+//   lightTheme: true,
 //   flipped: false,
 
-//   topLine: "React, Redux, Material UI",
 //   description: "Play a game of Trivia solo or with your friends.",
 //   projectLink: "https://steemitimages.com/DQmNUbQja94BzGPUfFxx8HZJFEERfNQ8CQ8GmAGN1miDpvh/Coming-Soon.png",
 //   projectGif: "https://media.giphy.com/media/X1wSXy6At9dGcodECs/giphy.gif",
@@ -126,11 +120,10 @@ export const qatar2022 = {
 //   live: false,
 // }
 // export const netflixObj = {
-//   name: 'Netflix Clone',
-//   darkTheme: true,
+//   title: 'Netflix Clone',
+//   lightTheme: true,
 //   flipped: false,
 
-//   topLine: 'React, Material UI',
 //   description:
 //     'Browse the Netflix library and watch its movie trailers. This Netflix clone was done using React JS.',
 //   projectLink: 'https://netflix-clone-1e91f.web.app/',
