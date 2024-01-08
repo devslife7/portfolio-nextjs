@@ -22,7 +22,7 @@ export default function Project(props: any) {
 
   const renderBadge = (list: string[]) => {
     return (
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-3 font-thin">
         {list.map((tech: any) => (
           <div className="bg-primary-900 px-3 text-primary-100 rounded-full">{tech}</div>
         ))}

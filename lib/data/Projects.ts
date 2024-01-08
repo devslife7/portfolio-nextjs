@@ -4,19 +4,20 @@ export const dsbConstruction = {
   flipped: false,
   mobile: false,
 
-  description: "Look up popular upcoming matches and create watchparties with your friends.",
+  description: "A business website to showcases the company's past work and allow users to leave a review.",
   keyPoints: [
-    "Modeled custom database schema and REST API.",
-    "Designed multi user relationships to allow users to send watch party invitations.",
-    "Utilized JSON Web Tokens and localStorage.",
-    "Full CRUD implementation for watchparties.",
+    "Allows admin to upload images and videos.",
+    "Backend and client side validation.",
+    "Users can leave a star rating and a review.",
+    "Implemented full CRUD for reviews and work.",
+    "Optimized for mobile use.",
   ],
-  projectLink: "https://main.d3kudh92mvp4u8.amplifyapp.com/",
-  projectGif: "https://media.giphy.com/media/HeeRZi4hagLEl3qPIY/giphy.gif",
-  projectGitHub: "https://github.com/devslife7/FutHub",
+  projectLink: "https://dsbgeneralconstruction.vercel.app/",
+  projectGif: "/dsbgeneral.png",
+  projectGitHub: "https://github.com/devslife7/dsbgeneralconstruction",
 
-  techStack: ["React JS", "Redux", "Ruby on Rails", "Postgresql", "Material UI"],
-  hosting: ["Railway", "AWS"],
+  techStack: ["NextJS", "TailwindCSS", "Typescript", "React JS", "Postgresql"],
+  hosting: ["vercel"],
   live: true,
 }
 export const cdcDayCare = {
@@ -25,19 +26,20 @@ export const cdcDayCare = {
   flipped: true,
   mobile: false,
 
-  description: "Look up popular upcoming matches and create watchparties with your friends.",
+  description:
+    "It provides information about the daycare services offered, specific topics related to childcare, and aims to showcase the facilities and features of the daycare center",
   keyPoints: [
-    "Modeled custom database schema and REST API.",
-    "Designed multi user relationships to allow users to send watch party invitations.",
-    "Utilized JSON Web Tokens and localStorage.",
-    "Full CRUD implementation for watchparties.",
+    "Multi Language Support. English and Spanish.",
+    "Optimized for mobile use.",
+    "Showcases business services and facilities.",
+    "Allows potential clients to contact the business.",
   ],
-  projectLink: "https://main.d3kudh92mvp4u8.amplifyapp.com/",
-  projectGif: "https://media.giphy.com/media/HeeRZi4hagLEl3qPIY/giphy.gif",
-  projectGitHub: "https://github.com/devslife7/FutHub",
+  projectLink: "https://cdcdaycare.vercel.app/en/home",
+  projectGif: "/cdcdaycare.png",
+  projectGitHub: "https://github.com/devslife7/cdcdaycare",
 
-  techStack: ["React JS", "Redux", "Ruby on Rails", "Postgresql", "Material UI"],
-  hosting: ["Railway", "AWS"],
+  techStack: ["NextJS", "TailwindCSS", "Typescript", "React JS", "Postgresql"],
+  hosting: ["vercel"],
   live: true,
 }
 export const futFriendsObj = {
@@ -49,8 +51,9 @@ export const futFriendsObj = {
   description: "Look up popular upcoming matches and create watchparties with your friends.",
   keyPoints: [
     "Modeled custom database schema and REST API.",
+    "Developed custom REST API written in Ruby on Rails.",
     "Designed multi user relationships to allow users to send watch party invitations.",
-    "Utilized JSON Web Tokens and localStorage.",
+    "Utilized JSON Web Tokens for secure login.",
     "Full CRUD implementation for watchparties.",
   ],
   projectLink: "https://main.d3kudh92mvp4u8.amplifyapp.com/",
@@ -71,7 +74,8 @@ export const proTaskObj = {
   keyPoints: [
     "Developed Full CRUD integration for milestones, projects, tasks and entries.",
     "Utilized JSON Web Tokens for secure user login.",
-    "Modeled custom database schema and REST API.",
+    "Developed custom REST API written in Ruby on Rails.",
+    "Modeled custom database schema in Postgresql.",
   ],
 
   projectLink: "https://main.d18y87fht79wtx.amplifyapp.com/",
