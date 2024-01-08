@@ -5,7 +5,19 @@ import { GitHubSVG, LinkSVG } from "../../../public/svgs"
 import { buttonStyles } from "../../ui/button"
 
 export default function Project(props: any) {
-  const { name, description, live, techStack, projectLink, hosting, projectGif, projectGitHub } = props
+  const {
+    name,
+    description,
+    live,
+    techStack,
+    projectLink,
+    hosting,
+    projectGif,
+    projectGitHub,
+    flipped,
+    keyPoints,
+    mobile,
+  } = props
 
   const renderBadge = (list: string[]) => {
     return (
@@ -17,36 +29,47 @@ export default function Project(props: any) {
     )
   }
 
+  const renderKeyPoints = () => {
+    return keyPoints?.map((point: any) => {
+      return (
+        <div className={cn("opacity-90 text", { "text-black/70": flipped })}>
+          <span>&#183;</span> {point}
+        </div>
+      )
+    })
+  }
+
   return (
-    <div className="flex flex-wrap lg:flex-nowrap my-container justify-between gap-40">
-      <div className="bg--400 max-w-[60vw] space-y-8">
-        <div className="text-5xl font-medium text-primary">{name}</div>
-        <div className="text-2xl">{description}</div>
-        <div>
-          <span>Tech Stack:</span>
-          {renderBadge(techStack)}
-        </div>
-        <div>
-          <h3>Hosted by:</h3>
-          {renderBadge(hosting)}
-        </div>
-
-        <div className="">
-          {live ? (
-            <a href={projectLink} className={cn(buttonStyles(), "mr-10 ")} target="_blank" rel="noreferrer">
-              <LinkSVG className="w-4 h-4" />
-              Live Demo
+    <div className={cn({ "bg-white": flipped })}>
+      <div className={cn("flex flex-wrap lg:flex-nowrap my-container justify-between py-28 gap-4")}>
+        <div className="bg--400 max-w-[50vw]">
+          <div className="text-5xl font-medium text-primary mb-1">{name}</div>
+          <div className={cn("text-xl mb-6 opacity-90", { "text-black/70": flipped })}>{description}</div>
+          {renderKeyPoints()}
+          <div className="mb-4 mt-6">
+            <p className={cn(" opacity-90", { "text-black/70": flipped })}>Tech Stack:</p>
+            {renderBadge(techStack)}
+          </div>
+          <div className="mb-8">
+            <p className={cn("opacity-90", { "text-black/70": flipped })}>Hosted by</p>
+            {renderBadge(hosting)}
+          </div>
+          <div className="">
+            {live ? (
+              <a href={projectLink} className={cn(buttonStyles(), "mr-10 ")} target="_blank" rel="noreferrer">
+                <LinkSVG className="w-4 h-4" />
+                Live Demo
+              </a>
+            ) : null}
+            <a href={projectGitHub} className={buttonStyles({ variant: "inverted" })} target="_blank" rel="noreferrer">
+              <GitHubSVG className="w-4 h-4" />
+              GitHub
             </a>
-          ) : null}
-          <a href={projectGitHub} className={buttonStyles({ variant: "inverted" })} target="_blank" rel="noreferrer">
-            <GitHubSVG className="w-4 h-4" />
-            GitHub
-          </a>
+          </div>
         </div>
-      </div>
-
-      <div className="w-full max-w-[700px]">
-        <img src={projectGif} className="h-full w-full object-contain" />
+        <div className={cn("w-full max-w-[700px]", { "max-w-[400px]": mobile })}>
+          <img src={projectGif} className="h-full w-full object-contain" />
+        </div>
       </div>
     </div>
   )
