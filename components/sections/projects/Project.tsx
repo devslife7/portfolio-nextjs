@@ -87,7 +87,11 @@ export default function Project(props: any) {
             </a>
           </div>
         </div>
-        <div className={cn("w-full max-w-[700px]", { "max-w-[300px] m-auto": mobile })}>
+        <div
+          className={cn("w-full max-w-[700px]", {
+            "max-w-[300px] m-auto": mobile,
+          })}
+        >
           <img src={projectGif} className="h-full w-full object-contain" alt="Project image" />
         </div>
       </div>

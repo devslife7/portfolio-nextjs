@@ -7,27 +7,31 @@ type SkillType = {
 
 export default function Skills() {
   const renderSkills = (skills: SkillType[]) => {
-    return skills.map((skill, index) => (
-      <div key={index}>
-        <div className="w-20 h-24 m-auto">{skill.icon()}</div>
-        <div className="text-lg opacity-70">{skill.name}</div>
+    return (
+      <div className="flex justify-center gap-8">
+        {skills.map((skill, index) => (
+          <div key={index}>
+            <div className="w-20 h-24 m-auto">{skill.icon()}</div>
+            <div className="text-lg opacity-70">{skill.name}</div>
+          </div>
+        ))}
       </div>
-    ))
+    )
   }
 
   return (
-    <section id="skills" className="my-container">
-      <h2 className="text-5xl font-medium text-center pt-20">
+    <section id="skills" className="my-container py-20">
+      <h2 className="text-5xl font-medium text-center">
         Ski<span className="text-primary">ll</span>s
       </h2>
 
       <div className="text-center ">
         <label>Front End</label>
-        <div className="flex justify-center gap-8">{renderSkills(frontEnd)}la</div>
+        {renderSkills(frontEnd)}
         <label>Back End</label>
-        <div className="flex justify-center gap-8">{renderSkills(backEnd)}</div>
+        {renderSkills(backEnd)}
         <label>Tools</label>
-        <div className="flex justify-center gap-8">{renderSkills(tools)}</div>
+        {renderSkills(tools)}
       </div>
     </section>
   )
