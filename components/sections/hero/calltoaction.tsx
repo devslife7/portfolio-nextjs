@@ -8,7 +8,7 @@ export default function CallToAction() {
   return (
     <div>
       <ScrollLink
-        className={cn(buttonStyles({ size: "lg" }), "mb-40 md:mb-0 text-base md:text-base")}
+        className={cn(buttonStyles({ size: "lg" }), "mb-40 md:mb-0")}
         to="projects"
         smooth="true"
         duration={500}

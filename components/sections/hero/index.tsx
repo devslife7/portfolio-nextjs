@@ -21,7 +21,7 @@ export default function Hero() {
   }
 
   return (
-    <div id="home" className="relative h-screen bg-black/60">
+    <div id="home" className="relative h-screen bg-black/70">
       <Image
         src="/hero-background.jpg"
         fill
