@@ -20,10 +20,8 @@ const buttonStyles = cva(
       size: {
         sm: "px-6 py-1 text-base",
         md: "px-6 py-2",
-        lg: "px-8 py-2",
+        lg: "px-8 py-2 text-lg",
       },
-      // mobile: { true: "w-full lg:w-auto" },
-      // wide: { true: "w-full" }
       responsive: { true: "w-full" },
     },
     defaultVariants: {

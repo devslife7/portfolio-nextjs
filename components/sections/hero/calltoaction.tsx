@@ -7,9 +7,16 @@ import { Link as ScrollLink } from "react-scroll"
 export default function CallToAction() {
   return (
     <div>
-      <ScrollLink className={cn(buttonStyles(), " ")} to="projects" smooth="true" duration={500} spy offset={-64}>
+      <ScrollLink
+        className={cn(buttonStyles({ size: "lg" }), "mb-9 ")}
+        to="projects"
+        smooth="true"
+        duration={500}
+        spy
+        offset={-64}
+      >
         <div>My Projects</div>
-        <DownSVG />
+        <DownSVG className="animate-bounce" />
       </ScrollLink>
     </div>
   )
