@@ -15,8 +15,8 @@ export default function CallToAction() {
         spy
         offset={-64}
       >
-        <div>My Projects</div>
-        <DownSVG className="animate-bounce" />
+        My Projects
+        <DownSVG className="animate-bounce -mb-2 text-2xl" />
       </ScrollLink>
     </div>
   )
