@@ -7,7 +7,8 @@ export const dsbConstruction = {
   description: "A business website to showcases the company's past work and allow users to leave a review.",
   keyPoints: [
     "Allows admin to upload images and videos.",
-    "Backend and client side validation.",
+    "Proper error handling.",
+    "Server and client side validation.",
     "Users can leave a star rating and a review.",
     "Implemented full CRUD for reviews and work.",
     "Optimized for mobile use.",

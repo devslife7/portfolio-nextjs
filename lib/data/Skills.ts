@@ -99,10 +99,10 @@ export const tools = [
     name: "Firebase",
     icon: Firebase,
   },
-  // {
-  //   name: "Styled-Components",
-  //   icon: <StyledComponents />,
-  // },
+  {
+    name: "Styled-Components",
+    icon: StyledComponents,
+  },
   {
     name: "Affinity",
     icon: Affinity,
