@@ -33,7 +33,11 @@ export default function About() {
             usefulness and elegance.
           </p>
           <div>
-            <Link href="google.com" className={buttonStyles()}>
+            <Link
+              href="https://docs.google.com/document/d/17uI6lYjB1E6AioHoP3Cc6fBPmfFkutp2KXSefHKYsa8/edit?usp=sharing"
+              target="_blank"
+              className={buttonStyles()}
+            >
               Resume
               <div className="text-xl">
                 <LinkSVG />
