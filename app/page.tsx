@@ -7,11 +7,11 @@ import Projects from "../components/sections/projects"
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Projects />
-      <Skills />
+      {/* <Hero /> */}
+      {/* <Projects /> */}
+      {/* <Skills /> */}
       <About />
-      <Contact />
+      {/* <Contact /> */}
     </>
   )
 }

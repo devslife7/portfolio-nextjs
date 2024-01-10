@@ -8,12 +8,12 @@ import { VariantProps, cva } from "class-variance-authority"
 import { forwardRef } from "react"
 
 const buttonStyles = cva(
-  "inline-flex cursor-pointer items-center gap-2 justify-center w-auto rounded-full sm:w-auto px-auto transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 border border-transparent disabled:cursor-not-allowed disabled:opacity-60",
+  "inline-flex cursor-pointer items-center gap-2 justify-center rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 border border-transparent disabled:cursor-not-allowed disabled:opacity-60",
   {
     variants: {
       variant: {
         primary: "bg-primary text-white hover:bg-primary-600 hover:bg-primary-600 focus-visible:ring-custom-white",
-        secondary: "bg-blue-100 text-blue-700 hover:bg-blue-200 ",
+        secondary: "bg-blue-100 text-blue-700 hover:bg-blue-200",
         danger: "bg-red-100 text-red-600 hover:bg-red-200",
         cancel: "text-gray-700",
         inverted:
