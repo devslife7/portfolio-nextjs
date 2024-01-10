@@ -1,4 +1,4 @@
-import { SendSVG } from "@/public/svgs"
+import { MailSVG, MapSVG, PersonSVG, SendSVG } from "@/public/svgs"
 import Button from "../ui/button"
 
 export default function Contact() {
@@ -15,12 +15,33 @@ export default function Contact() {
             I'm excited to connect with new people or answer any questions you might have. Easily send me a message
             using the following form including your email, and I will be in touch as soon as possible.
           </p>
-          <h3>Name</h3>
-          <p>Marcos Velasco</p>
-          <h3>Location</h3>
-          <p>Alexandria, VA</p>
-          <h3>Email</h3>
-          <p>devslife@gmail.com</p>
+          <div className="flex items-center">
+            <div className="text-primary text-3xl mr-4">
+              <PersonSVG />
+            </div>
+            <div>
+              <h3>Name</h3>
+              <p>Marcos Velasco</p>
+            </div>
+          </div>
+          <div className="flex items-center">
+            <div className="text-primary text-3xl mr-4">
+              <MapSVG />
+            </div>
+            <div>
+              <h3>Location</h3>
+              <p>Alexandria, VA</p>
+            </div>
+          </div>
+          <div className="flex items-center">
+            <div className="text-primary text-3xl mr-4">
+              <MailSVG />
+            </div>
+            <div>
+              <h3>Email</h3>
+              <p>devslife@gmail.com</p>
+            </div>
+          </div>
         </div>
         <div className="space-y-4">
           <h2 className="text-2xl font-medium">Message me</h2>
