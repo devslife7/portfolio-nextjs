@@ -24,7 +24,12 @@ export default function Project(props: any) {
     return (
       <div className="flex flex-wrap gap-3 font-thin">
         {list.map((tech: string, idx: number) => (
-          <div key={idx} className="bg-primary-900 px-3 text-primary-100 rounded-full">
+          <div
+            key={idx}
+            className={cn("bg-primary-900 px-3 text-primary-100 rounded-full", {
+              "bg-primary-100 text-primary-900": lightTheme,
+            })}
+          >
             {tech}
           </div>
         ))}
