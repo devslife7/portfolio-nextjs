@@ -9,7 +9,7 @@ export default function Hero() {
     return socialMediaLinks.map((link, index) => (
       <Link
         key={index}
-        className="hover:text-primary md:ml-4"
+        className="hover:text-primary md:ml-1"
         href={link.href}
         target="_blank"
         rel="noopener noreferrer"
