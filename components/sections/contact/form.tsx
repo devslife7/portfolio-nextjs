@@ -4,7 +4,9 @@ import Button from "@/components/ui/button"
 import { SendSVG, SpinnerSVG } from "@/public/svgs"
 import { useFormStatus } from "react-dom"
 import { ZodType, z } from "zod"
-import React, { useRef } from "react"
+import React, { useRef, useState } from "react"
+import Input, { inputStyles } from "@/components/ui/input"
+import { cn } from "@/lib/utils"
 
 type FormTypes = {
   name: string
@@ -25,53 +27,50 @@ const schema: ZodType<FormTypes> = z.object({
 })
 
 export default function Form() {
-  const form = useRef<HTMLFormElement>(null)
+  const formRef = useRef<HTMLFormElement>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
+  async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    console.log("form submit init")
+    setIsLoading(true)
+
+    // set timeout for 2 seconds ch
+    await new Promise(resolve => setTimeout(resolve, 2000))
+
+    setIsLoading(false)
+
+    console.log("form submitted")
+  }
 
   return (
     <div className="space-y-4 max-w-xl">
       <h2 className="text-2xl font-medium">Message me</h2>
-      <form ref={form} action={sendMessage} className="grid grid-cols-4 gap-4 text-gray-600">
-        <input
-          className="py-3 px-4 rounded-3xl border-2 border-gray-300 placeholder:font-light placeholder-gray-400 focus:outline-none col-span-2"
-          type="text"
-          id="name"
-          placeholder="Name"
-          name="from_name"
-        />
-        <input
-          className="py-3 px-4 rounded-3xl border-2 border-gray-300 placeholder:font-light placeholder-gray-400 focus:outline-none col-span-2"
-          type="email"
-          id="email"
-          placeholder="Email"
-          name="from_email"
-        />
+      <form ref={formRef} onSubmit={handleFormSubmit} className="grid grid-cols-4 gap-4 text-gray-600">
+        <Input disabled={isLoading} type="text" id="name" placeholder="Name" name="from_name" />
+        <Input disabled={isLoading} type="email" id="email" placeholder="Email" name="from_email" />
+
         <textarea
-          className="w-full py-3 px-4 rounded-3xl border-2 border-gray-300 placeholder:font-light placeholder-gray-400 focus:outline-none col-span-4"
+          disabled={isLoading}
+          className={cn(inputStyles(), "col-span-4")}
           rows={6}
           id="message"
           placeholder="Message..."
           name="from_message"
         />
-        <FormButton />
+        <>
+          <Button type="submit" className="col-span-4 lg:col-span-1" disabled={isLoading}>
+            {!isLoading ? (
+              <>
+                <SendSVG className="text-xl" />
+                Send
+              </>
+            ) : (
+              <SpinnerSVG className="animate-spin text-2xl" />
+            )}
+          </Button>
+        </>
       </form>
     </div>
-  )
-}
-
-function FormButton() {
-  const pending = useFormStatus()
-  return (
-    <>
-      <Button type="submit" className="col-span-4 lg:col-span-1">
-        {pending ? (
-          <>
-            <SendSVG className="text-xl" />
-            Send
-          </>
-        ) : (
-          <SpinnerSVG className="animate-spin text-2xl" />
-        )}
-      </Button>
-    </>
   )
 }
