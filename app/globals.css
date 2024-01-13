@@ -80,5 +80,5 @@ body {
 }
 
 .my-container {
-  @apply container mx-auto px-4 lg:px-8;
+  @apply container mx-auto px-4 sm:px-10 lg:px-12;
 }
