@@ -7,6 +7,7 @@ import { ZodType, z } from "zod"
 import React, { useRef, useState } from "react"
 import Input, { inputStyles } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
+import { toast } from "sonner"
 
 type FormTypes = {
   name: string
@@ -35,10 +36,12 @@ export default function Form() {
     console.log("form submit init")
     setIsLoading(true)
 
-    // set timeout for 2 seconds ch
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    // set timeout for 1 second to simulate a real request
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
     setIsLoading(false)
+    const userName = (formRef.current?.children[0] as HTMLInputElement)?.value
+    toast.success(`Hi ${userName}, your message was sent successfully`)
 
     console.log("form submitted")
   }
@@ -58,18 +61,16 @@ export default function Form() {
           placeholder="Message..."
           name="from_message"
         />
-        <>
-          <Button type="submit" className="col-span-4 lg:col-span-1" disabled={isLoading}>
-            {!isLoading ? (
-              <>
-                <SendSVG className="text-xl" />
-                Send
-              </>
-            ) : (
-              <SpinnerSVG className="animate-spin text-2xl" />
-            )}
-          </Button>
-        </>
+        <Button type="submit" className="col-span-4 lg:col-span-1" disabled={isLoading}>
+          {!isLoading ? (
+            <>
+              <SendSVG className="text-xl" />
+              Send
+            </>
+          ) : (
+            <SpinnerSVG className="animate-spin text-2xl" />
+          )}
+        </Button>
       </form>
     </div>
   )
