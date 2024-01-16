@@ -23,8 +23,8 @@ export default function Skills() {
   }
 
   return (
-    <section id="skills" className="my-container py-20">
-      <h2 className="text-5xl font-medium text-center mb-10">
+    <section id="skills" className="my-container pt-20 pb-28">
+      <h2 className="text-5xl font-medium text-center">
         Ski<span className="text-primary">ll</span>s
       </h2>
 

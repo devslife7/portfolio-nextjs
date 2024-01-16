@@ -8,7 +8,7 @@ import { VariantProps, cva } from "class-variance-authority"
 import { forwardRef } from "react"
 
 const buttonStyles = cva(
-  "inline-flex cursor-pointer items-center gap-2 justify-center rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 border border-transparent disabled:cursor-not-allowed disabled:opacity-60",
+  "inline-flex cursor-pointer border border-2 border-primary items-center gap-2 justify-center rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60",
   {
     variants: {
       variant: {

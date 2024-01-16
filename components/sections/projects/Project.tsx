@@ -69,25 +69,22 @@ export default function Project(props: any) {
             <p className={cn("opacity-90", { "text-black/70": lightTheme })}>Hosted by</p>
             {renderBadge(hosting)}
           </div>
-          <div className="">
+          <div className="sm:space-x-4 space-y-4">
             {live ? (
-              <a
-                href={projectLink}
-                className={cn(buttonStyles(), "mb-4 sm:mb-0 sm:mr-10  w-full")}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <LinkSVG className="w-4 h-4" />
+              <a href={projectLink} className={cn(buttonStyles(), "w-full sm:w-auto")} target="_blank" rel="noreferrer">
+                <div className="text-[23px]">
+                  <LinkSVG />
+                </div>
                 Live Demo
               </a>
             ) : null}
             <a
               href={projectGitHub}
-              className={cn(buttonStyles({ variant: "inverted" }), "w-full")}
+              className={cn(buttonStyles({ variant: "inverted" }), "w-full sm:w-auto mx-0 my-0")}
               target="_blank"
               rel="noreferrer"
             >
-              <GitHubSVG className="w-4 h-4" />
+              <GitHubSVG />
               GitHub
             </a>
           </div>
