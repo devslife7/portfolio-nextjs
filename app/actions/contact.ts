@@ -1,35 +1,34 @@
 "use server"
+import { EmailTemplate } from "@/components/email-template"
 // import emailjs from "@emailjs/browser"
 import { Resend } from "resend"
 
-export default async function sendMessage() {
+export default async function sendMessage(formData: FormData) {
   // console.log("form Data", typeof formData)
 
-  // const resend = new Resend("re_VirAGRkV_HwsRayS9pz47xA7Dqjw2RZCw")
-  // const resend = new Resend("re_HPv2V5Ad_JMymqzScaqbUruPJLBetZkNs")
+  const resend = new Resend(process.env.RESEND_API_KEY)
 
-  // resend.emails.send({
-  //   from: "onboarding@resend.dev",
-  //   to: "devslife7@gmail.com",
-  //   subject: "Hello World",
-  //   html: "<p>Congrats on sending your <strong>first email</strong>!</p>",
-  // })
+  const { data, error } = await resend.emails.send({
+    from: "Portfolio Website <onboarding@resend.dev>",
+    to: "nomadlive4@gmail.com",
+    subject: "New Website Contact",
+    reply_to: "devslive7@gmail.com",
+    react: EmailTemplate({ firstName: "Mike Makousty here" }),
+    text: "Hello World",
+  })
 
-  // emailjs.sendForm("service_b27ezi3", "template_c4rqhh1", formData, "hpeVPBIjR0dTtIqex").then(
-  //   result => {
-  //     console.log("result", result.text)
-  //   error => {
-  //   },
-  //     console.log(error.text)
-  //   }
-  // )
+  if (error) {
+    return {
+      status: 400,
+      message: "Message failed to send",
+      error: error,
+    }
+  }
 
-  console.log("message sent")
-
+  console.log("res:", data, "and: ", error)
   return {
-    type: "SEND_MESSAGE",
-    payload: {
-      message: "Hello World!",
-    },
+    status: 200,
+    message: "Message sent successfully",
+    error: null,
   }
 }
