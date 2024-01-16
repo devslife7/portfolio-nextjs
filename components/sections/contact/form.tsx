@@ -7,7 +7,7 @@ import { useRef } from "react"
 import Input from "@/components/ui/input"
 import TextArea from "@/components/ui/textarea"
 import { toast } from "sonner"
-import { contactFormSchema } from "@/lib/validators/contact-form"
+import { ContactFormSchema } from "@/lib/validators/contact-form"
 
 export default function Form() {
   const formRef = useRef<HTMLFormElement>(null)
@@ -21,22 +21,22 @@ export default function Form() {
     // await new Promise(resolve => setTimeout(resolve, 1000))
 
     // validate form data
-    const parsedData = contactFormSchema.safeParse({ name, email, message })
-    if (!parsedData.success) {
-      console.log("result", parsedData.error.issues)
-      toast.error(
-        <div className="text-base">
-          {parsedData.error.issues.map(issue => (
-            <h2>&#183; {issue.message}</h2>
+    const validated = ContactFormSchema.safeParse({ name, email, message })
+    if (!validated.success) {
+      return toast.error(
+        <div className="text-sm">
+          {validated.error.issues.map((issue, idx) => (
+            <p key={idx}>&#183; {issue.message}</p>
           ))}
         </div>
       )
-      return
     }
 
     // // send message using a server action
     // const { error } = await sendMessage(parsedData)
-    // if (error) return toast.error(error.message)
+    const res = await sendMessage(validated.data)
+    console.log("res", res)
+    // if (error) return toast.error(error)
 
     // // run success toast and reset form
     // toast.success(`Thanks ${name}, your message was sent successfully`)
