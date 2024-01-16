@@ -1,7 +1,7 @@
 "use client"
 import sendMessage from "@/app/actions/contact"
 import Button from "@/components/ui/button"
-import { SendSVG } from "@/public/svgs"
+import { SendSVG, SpinnerSVG } from "@/public/svgs"
 import { useRef } from "react"
 import Input from "@/components/ui/input"
 import TextArea from "@/components/ui/textarea"
@@ -9,6 +9,7 @@ import { toast } from "sonner"
 import { ContactFormSchema } from "@/lib/validators/contact-form"
 import ReCAPTCHA from "react-google-recaptcha"
 import MyRecaptcha from "@/components/ui/my-recaptcha"
+import { useFormStatus } from "react-dom"
 
 export default function Form() {
   const formRef = useRef<HTMLFormElement>(null)
@@ -60,11 +61,24 @@ export default function Form() {
         <Input className="col-span-2" type="email" id="email" placeholder="Email" name="from_email" />
         <TextArea className="col-span-4" rows={6} id="message" placeholder="Message..." name="from_message" />
         <MyRecaptcha className="col-span-4" ref={reCaptchaRef} />
-        <Button type="submit" className="col-span-4 lg:col-span-1">
-          <SendSVG className="text-xl" />
-          Send
-        </Button>
+        <SubmitButton />
       </form>
     </div>
+  )
+}
+
+const SubmitButton = () => {
+  const { pending } = useFormStatus()
+  return (
+    <Button type="submit" className="col-span-4 lg:col-span-1" disabled={pending}>
+      {pending ? (
+        <SpinnerSVG className="animate-spin text-2xl" />
+      ) : (
+        <>
+          <SendSVG className="text-xl" />
+          Send
+        </>
+      )}
+    </Button>
   )
 }

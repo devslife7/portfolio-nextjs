@@ -4,10 +4,8 @@
     mobile(true, false): determines the full width in small screens
 */
 import { cn } from "@/lib/utils"
-import { SpinnerSVG } from "@/public/svgs"
 import { VariantProps, cva } from "class-variance-authority"
 import { forwardRef } from "react"
-import { useFormStatus } from "react-dom"
 
 const buttonStyles = cva(
   "inline-flex cursor-pointer items-center gap-2 justify-center rounded-full transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 border border-transparent disabled:cursor-not-allowed disabled:opacity-60",
@@ -37,21 +35,9 @@ const buttonStyles = cva(
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonStyles> {}
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ variant, size, responsive, className, children, ...props }, ref) => {
-    const { pending } = useFormStatus()
-    return (
-      <button
-        ref={ref}
-        disabled={pending}
-        className={cn(buttonStyles({ variant, size, responsive, className }))}
-        {...props}
-      >
-        {pending ? <SpinnerSVG className="animate-spin text-2xl" /> : children}
-      </button>
-    )
-  }
-)
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ variant, size, responsive, className, ...props }, ref) => {
+  return <button ref={ref} className={cn(buttonStyles({ variant, size, responsive, className }))} {...props} />
+})
 Button.displayName = "Button"
 
 export default Button
