@@ -21,14 +21,14 @@ export default async function sendMessage(formData: unknown) {
   }
 
   // send email using the resend api
-  const { name, email } = validated.data
+  const { name, email, message } = validated.data
   const { error } = await resend.emails.send({
-    from: "Portfolio Website <onboarding@resend.dev>",
+    from: "Portfolio Website <marcos@marcosvelasco.com>",
     to: process.env.RESEND_CONTACT_EMAIL || "devslife7@gmail.com",
     subject: `${name} sent you a message from your portfolio website.`,
     reply_to: email,
     react: EmailTemplate(validated.data),
-    text: "New Website Contact",
+    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
   })
 
   if (error) {
