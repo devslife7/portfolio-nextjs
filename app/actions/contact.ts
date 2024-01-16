@@ -1,5 +1,5 @@
 "use server"
-import VercelInviteUserEmail from "@/components/email-template"
+import EmailTemplate from "@/components/email-template"
 import { ContactFormSchema } from "@/lib/validators/contact-form"
 // import emailjs from "@emailjs/browser"
 import { Resend } from "resend"
@@ -13,8 +13,10 @@ export default async function sendMessage(formData: unknown) {
   if (!validated.success) {
     return {
       status: 400,
-      message: "Message failed validate",
-      error: validated.error.issues,
+      error: {
+        message: "Message failed validate",
+        errors: validated.error.issues,
+      },
     }
   }
 
@@ -25,25 +27,17 @@ export default async function sendMessage(formData: unknown) {
     to: process.env.RESEND_CONTACT_EMAIL || "devslife7@gmail.com",
     subject: `${name} sent you a message from your portfolio website.`,
     reply_to: email,
-    react: VercelInviteUserEmail({
-      username: "zenorocha",
-      userImage: `/static/vercel-user.png`,
-      invitedByUsername: "bukinoshita",
-      invitedByEmail: "bukinoshita@example.com",
-      teamName: "My Project",
-      teamImage: `/static/vercel-team.png`,
-      inviteLink: "https://vercel.com/teams/invite/foo",
-      inviteFromIp: "204.13.186.218",
-      inviteFromLocation: "São Paulo, Brazil",
-    }),
+    react: EmailTemplate(validated.data),
     text: "New Website Contact",
   })
 
   if (error) {
     return {
       status: 400,
-      message: "Message failed to send.",
-      error: error,
+      error: {
+        message: "Message failed to send.",
+        errors: error,
+      },
     }
   }
 
