@@ -31,21 +31,24 @@ export default function Form() {
 
   const handleFormSubmit = async (formData: FormData) => {
     const name = formData.get("from_name") as string
+    const email = formData.get("from_email") as string
+    const message = formData.get("from_message") as string
 
     // set timeout for 1 second to simulate a real request
     // await new Promise(resolve => setTimeout(resolve, 1000))
 
     // validate form data
-    const result = schema.safeParse(formData)
-    if (!result.success) return toast.error(result.error.message)
+    const parsedData = schema.safeParse({ name, email, message })
+    console.log("result", parsedData)
+    if (!parsedData.success) return parsedData.error.issues.map(issue => toast.error(issue.message))
 
-    // send message using a server action
-    const { error } = await sendMessage(formData)
-    if (error) return toast.error(error.message)
+    // // send message using a server action
+    // const { error } = await sendMessage(parsedData)
+    // if (error) return toast.error(error.message)
 
-    // run success toast and reset form
-    toast.success(`Thanks ${name}, your message was sent successfully`)
-    formRef.current?.reset()
+    // // run success toast and reset form
+    // toast.success(`Thanks ${name}, your message was sent successfully`)
+    // formRef.current?.reset()
   }
 
   return (
