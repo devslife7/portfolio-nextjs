@@ -21,7 +21,7 @@ export default function EmailTemplate({ name, message, email }: EmailTemplatePro
               </div>
             </Section>
             <Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
-              Portfolio <strong>Contact Form</strong>
+              Portfolio <strong>Contact</strong>
             </Heading>
             <Text className="text-black text-[18px] leading-[24px]">
               <p className="text-[18px]">
@@ -35,7 +35,7 @@ export default function EmailTemplate({ name, message, email }: EmailTemplatePro
             <p>{email}</p>
 
             <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
-            <Text className="text-[#666666] text-[18px] leading-[24px]">
+            <Text className="text-[#666666] text-[16px] leading-[24px]">
               Reply to this email to send a message back to <strong>{name}</strong>.
             </Text>
           </Container>

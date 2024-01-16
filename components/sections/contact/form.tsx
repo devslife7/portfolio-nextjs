@@ -1,14 +1,12 @@
 "use client"
 import sendMessage from "@/app/actions/contact"
 import Button from "@/components/ui/button"
-import { EmailIllustrationSVG, SendSVG } from "@/public/svgs"
-import { ZodType, z } from "zod"
+import { SendSVG } from "@/public/svgs"
 import { useRef } from "react"
 import Input from "@/components/ui/input"
 import TextArea from "@/components/ui/textarea"
 import { toast } from "sonner"
 import { ContactFormSchema } from "@/lib/validators/contact-form"
-import VercelInviteUserEmail from "@/components/email-template"
 
 export default function Form() {
   const formRef = useRef<HTMLFormElement>(null)
@@ -17,9 +15,6 @@ export default function Form() {
     const name = formData.get("from_name") as string
     const email = formData.get("from_email") as string
     const message = formData.get("from_message") as string
-
-    // set timeout for 1 second to simulate a real request
-    // await new Promise(resolve => setTimeout(resolve, 1000))
 
     // validate form data
     const validated = ContactFormSchema.safeParse({ name, email, message })
@@ -34,7 +29,6 @@ export default function Form() {
     }
 
     // // send message using a server action
-    // const { error } = await sendMessage(parsedData)
     const { error } = await sendMessage(validated.data)
     if (error) return toast.error(error.message)
 
@@ -55,10 +49,6 @@ export default function Form() {
           Send
         </Button>
       </form>
-      <div className="w-[200px] bg-red-400 text-[12rem] mx-auto">
-        <EmailIllustrationSVG />
-      </div>
-      <div>asdfasdf</div>
     </div>
   )
 }
