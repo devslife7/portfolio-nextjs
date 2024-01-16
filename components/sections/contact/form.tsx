@@ -8,6 +8,7 @@ import React, { useRef, useState } from "react"
 import Input, { inputStyles } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
 import { toast } from "sonner"
+import emailjs from "@emailjs/browser"
 
 type FormTypes = {
   name: string
@@ -31,19 +32,32 @@ export default function Form() {
   const formRef = useRef<HTMLFormElement>(null)
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  async function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log("form submit init")
     setIsLoading(true)
 
     // set timeout for 1 second to simulate a real request
     await new Promise(resolve => setTimeout(resolve, 1000))
 
+    await sendMessage()
+
+    // emailjs
+    //   .sendForm("service_b27ezi3", "template_c4rqhh1", formRef.current as HTMLFormElement, "hpeVPBIjR0dTtIqex")
+    //   .then(
+    //     result => {
+    //       setIsLoading(false)
+    //       console.log("result", result.text)
+    //     },
+    //     error => {
+    //       console.log(error.text)
+    //     }
+    //   )
+
     setIsLoading(false)
     const userName = (formRef.current?.children[0] as HTMLInputElement)?.value
     toast.success(`Hi ${userName}, your message was sent successfully`)
 
-    console.log("form submitted")
+    formRef.current?.reset()
   }
 
   return (
