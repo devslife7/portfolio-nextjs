@@ -19,6 +19,7 @@ export default function Project(props: any) {
     keyPoints,
     lightTheme,
     mobile,
+    isPreviewGif,
   } = props
 
   const renderBadge = (list: string[]) => {
@@ -95,7 +96,13 @@ export default function Project(props: any) {
             "max-w-[300px] m-auto": mobile,
           })}
         >
-          <Image src={projectGif} className="h-full w-full object-contain" alt="Project image" />
+          <Image
+            src={projectGif}
+            className="h-full w-full object-contain"
+            unoptimized={isPreviewGif}
+            sizes="60vw"
+            alt="Project image"
+          />
         </div>
       </div>
     </div>

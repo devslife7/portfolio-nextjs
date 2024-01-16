@@ -3,6 +3,7 @@ export const dsbConstruction = {
   lightTheme: false,
   flipped: false,
   mobile: false,
+  isPreviewGif: false,
 
   description: "A business website to showcases the company's past work and allow users to leave a review.",
   keyPoints: [
@@ -26,6 +27,7 @@ export const cdcDayCare = {
   lightTheme: true,
   flipped: true,
   mobile: false,
+  isPreviewGif: false,
 
   description:
     "It provides information about the daycare services offered, specific topics related to childcare, and aims to showcase the facilities and features of the daycare center",
@@ -48,6 +50,7 @@ export const futFriendsObj = {
   lightTheme: false,
   flipped: false,
   mobile: false,
+  isPreviewGif: true,
 
   description: "Look up popular upcoming matches and create watchparties with your friends.",
   keyPoints: [
@@ -70,6 +73,7 @@ export const proTaskObj = {
   lightTheme: true,
   flipped: true,
   mobile: false,
+  isPreviewGif: true,
 
   description: "Helps your teams to organize, track, and manage their work.",
   keyPoints: [
@@ -92,6 +96,7 @@ export const qatar2022 = {
   lightTheme: false,
   flipped: false,
   mobile: true,
+  isPreviewGif: true,
 
   description:
     "Track who is winning at Qatar World Cup 2022. A tracking website that helps my friends and I see who is winning. Official results update in real time thanks to the integration of API-FOOTBALL.",
