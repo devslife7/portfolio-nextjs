@@ -16,23 +16,26 @@ export default function EmailTemplate({ name, message, email }: EmailTemplatePro
         <Body className="bg-white my-auto mx-auto font-sans">
           <Container className="border border-solid border-[#eaeaea] rounded my-[40px] mx-auto p-[20px] w-[465px]">
             <Section className="mt-[32px]">
-              <div className="size-[200px] text-[12rem] mx-auto">
+              <div className="w-[150px] text-[12rem] mx-auto">
                 <EmailIllustrationSVG />
               </div>
             </Section>
             <Heading className="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0">
               Portfolio <strong>Contact Form</strong>
             </Heading>
-            <Text className="text-black text-[14px] leading-[24px]">
-              <strong>From </strong> {name} {`  <${email}>`}
+            <Text className="text-black text-[18px] leading-[24px]">
+              <p className="text-[18px]">
+                <span className="font-semibold text-[16px]">Name: </span> <span className="text-[18px]">{name}</span>
+              </p>
             </Text>
-            <Text className="text-black text-[14px] leading-[24px]">
-              <strong>Message </strong>
-              {message}
+            <Text className="text-black text-[18px] leading-[24px]">
+              <span className="font-semibold text-[16px]">Message: </span>
+              <span className="text-[18px]">{message}</span>
             </Text>
+            <p>{email}</p>
 
             <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
-            <Text className="text-[#666666] text-lg leading-[24px]">
+            <Text className="text-[#666666] text-[18px] leading-[24px]">
               Reply to this email to send a message back to <strong>{name}</strong>.
             </Text>
           </Container>

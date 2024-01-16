@@ -55,7 +55,7 @@ export default function Form() {
           Send
         </Button>
       </form>
-      <div className="size-[200px] text-[12rem] mx-auto">
+      <div className="w-[200px] bg-red-400 text-[12rem] mx-auto">
         <EmailIllustrationSVG />
       </div>
       <div>asdfasdf</div>
