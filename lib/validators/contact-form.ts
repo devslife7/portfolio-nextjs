@@ -10,6 +10,7 @@ export const ContactFormSchema = z.object({
     .string()
     .min(1, { message: "Message is required." })
     .max(100, { message: "Message must be less than 100 characters." }),
+  recaptcha: z.string().min(1, { message: "reCAPTCHA is required." }),
 })
 
 export type contactFormTypes = z.infer<typeof ContactFormSchema>

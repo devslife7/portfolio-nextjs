@@ -1,11 +1,11 @@
 "use server"
 
-export default async function validateReCaptcha({ token }: { token: string }) {
+export default async function verifyReCaptcha(token: string) {
   console.log("validateReCaptcha with token: ", token)
 
   const googleURL = `
   https://www.google.com/recaptcha/api/siteverify?secret=
-  ${process.env.RECAPTCHA_API_KEY}
+  ${process.env.RECAPTCHA_SECRET_KEY}
   &response=
   ${token}
   `

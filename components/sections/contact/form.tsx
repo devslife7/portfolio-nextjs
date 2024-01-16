@@ -7,6 +7,8 @@ import Input from "@/components/ui/input"
 import TextArea from "@/components/ui/textarea"
 import { toast } from "sonner"
 import { ContactFormSchema } from "@/lib/validators/contact-form"
+import ReCAPTCHA from "react-google-recaptcha"
+import verifyReCaptcha from "@/app/actions/reCaptcha"
 
 export default function Form() {
   const formRef = useRef<HTMLFormElement>(null)
@@ -15,9 +17,10 @@ export default function Form() {
     const name = formData.get("from_name") as string
     const email = formData.get("from_email") as string
     const message = formData.get("from_message") as string
+    const recaptcha = formData.get("g-recaptcha-response") as string
 
     // validate form data
-    const validated = ContactFormSchema.safeParse({ name, email, message })
+    const validated = ContactFormSchema.safeParse({ name, email, message, recaptcha })
     if (!validated.success) {
       return toast.error(
         <div className="text-sm">
@@ -27,15 +30,17 @@ export default function Form() {
         </div>
       )
     }
+    // verify recaptcha
+    const captchaResp = await verifyReCaptcha(validated.data.recaptcha)
 
-    // // send message using a server action
+    // send message using a server action
     const resp = await sendMessage(validated.data)
     if (!resp.success) {
       toast.error("Server error. check console for more details.")
       return console.error(resp.error)
     }
 
-    // // run success toast and reset form
+    // run success toast and reset form
     toast.success(`Thanks ${name}, your message was sent successfully`)
     formRef.current?.reset()
   }
@@ -47,6 +52,7 @@ export default function Form() {
         <Input className="col-span-2" type="text" id="name" placeholder="Name" name="from_name" />
         <Input className="col-span-2" type="email" id="email" placeholder="Email" name="from_email" />
         <TextArea className="col-span-4" rows={6} id="message" placeholder="Message..." name="from_message" />
+        <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!} className="col-span-4" />
         <Button type="submit" className="col-span-4 lg:col-span-1">
           <SendSVG className="text-xl" />
           Send
