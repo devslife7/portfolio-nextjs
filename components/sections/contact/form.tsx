@@ -29,8 +29,11 @@ export default function Form() {
     }
 
     // // send message using a server action
-    const { error } = await sendMessage(validated.data)
-    if (error) return toast.error(error.message)
+    const resp = await sendMessage(validated.data)
+    if (!resp.success) {
+      toast.error("Server error. check console for more details.")
+      return console.error(resp.error)
+    }
 
     // // run success toast and reset form
     toast.success(`Thanks ${name}, your message was sent successfully`)
