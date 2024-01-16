@@ -12,7 +12,7 @@ export default function Contact() {
         <div>
           <h2 className="text-2xl font-medium mb-2">Get in Touch</h2>
           <p className="leading-relaxed tracking-wide mb-8 text-slate-600 text-lg">
-            I'm excited to connect with new people or answer any questions you might have. Easily send me a message
+            I&apos;m excited to connect with new people or answer any questions you might have. Easily send me a message
             using the following form including your email, and I will be in touch as soon as possible.
           </p>
           <div className="space-y-6 text-lg">
