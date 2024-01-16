@@ -34,31 +34,21 @@ export default function Form() {
 
     // // send message using a server action
     // const { error } = await sendMessage(parsedData)
-    const res = await sendMessage(validated.data)
-    console.log("res", res)
+    const { error } = await sendMessage(validated.data)
     // if (error) return toast.error(error)
 
     // // run success toast and reset form
-    // toast.success(`Thanks ${name}, your message was sent successfully`)
-    // formRef.current?.reset()
+    toast.success(`Thanks ${name}, your message was sent successfully`)
+    formRef.current?.reset()
   }
 
   return (
     <div className="space-y-4 max-w-xl">
       <h2 className="text-2xl font-medium">Message me</h2>
       <form ref={formRef} action={handleFormSubmit} className="grid grid-cols-4 gap-4 text-gray-600">
-        <div className="col-span-2">
-          <Input type="text" id="name" placeholder="Name" name="from_name" />
-          {/* <span className="text-red-400 text-sm ml-5"></span> */}
-        </div>
-        <div className="col-span-2">
-          <Input type="email" id="email" placeholder="Email" name="from_email" />
-          {/* <span className="text-red-400 text-sm ml-5"></span> */}
-        </div>
-        <div className="col-span-4">
-          <TextArea className="col-span-4" rows={6} id="message" placeholder="Message..." name="from_message" />
-          {/* <span className="text-red-400 text-sm ml-5"></span> */}
-        </div>
+        <Input className="col-span-2" type="text" id="name" placeholder="Name" name="from_name" />
+        <Input className="col-span-2" type="email" id="email" placeholder="Email" name="from_email" />
+        <TextArea className="col-span-4" rows={6} id="message" placeholder="Message..." name="from_message" />
         <Button type="submit" className="col-span-4 lg:col-span-1">
           <SendSVG className="text-xl" />
           Send
