@@ -32,10 +32,10 @@ export default function EmailTemplate({ name, message, email }: EmailTemplatePro
               <span className="font-semibold text-[16px]">Message: </span>
               <span className="text-[18px]">{message}</span>
             </Text>
-            <p>{email}</p>
+            <p className="text-[12px]">{email}</p>
 
             <Hr className="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full" />
-            <Text className="text-[#666666] text-[16px] leading-[24px]">
+            <Text className="text-[#666666] text-[14px] leading-[24px]">
               Reply to this email to send a message back to <strong>{name}</strong>.
             </Text>
           </Container>
