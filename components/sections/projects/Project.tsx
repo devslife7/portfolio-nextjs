@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image"
 import { cn } from "../../../lib/utils"
 import { GitHubSVG, LinkSVG } from "../../../public/svgs"
 import { buttonStyles } from "../../ui/button"
@@ -94,7 +95,7 @@ export default function Project(props: any) {
             "max-w-[300px] m-auto": mobile,
           })}
         >
-          <img src={projectGif} className="h-full w-full object-contain" alt="Project image" />
+          <Image src={projectGif} className="h-full w-full object-contain" alt="Project image" />
         </div>
       </div>
     </div>
