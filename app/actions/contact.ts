@@ -22,8 +22,8 @@ export default async function sendMessage(formData: unknown) {
   // send email using the resend api
   const { name, email, message } = validated.data
   const { error } = await resend.emails.send({
-    from: "Portfolio Website <devslife7@gmail.com>",
-    to: process.env.RESEND_CONTACT_EMAIL || "devslife7@gmail.com",
+    from: "Portfolio Website <marcos@marcosvelasco.com>",
+    to: process.env.RESEND_CONTACT_EMAIL as string,
     subject: `${name} sent you a message from your portfolio website.`,
     reply_to: email,
     react: EmailTemplate(validated.data),
@@ -48,3 +48,20 @@ export default async function sendMessage(formData: unknown) {
     error: null,
   }
 }
+
+// const express = require('express')
+// const router = express.Router()
+// const axios = require('axios')
+
+// //POST route
+// router.post('/post', async (req, res) => {
+//   //Destructuring response token from request body
+//   const { token } = req.body
+
+//   //sends secret key and response token to google
+//   const googleURL = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.SECRET_KEY}&response=${token}`
+//   const googleResponse = await axios.post(googleURL)
+
+//   //check response status and send back to the client-side
+//   res.send(googleResponse.data.success)
+// })
