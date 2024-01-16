@@ -7,24 +7,7 @@ import { useRef } from "react"
 import Input from "@/components/ui/input"
 import TextArea from "@/components/ui/textarea"
 import { toast } from "sonner"
-
-type FormTypes = {
-  name: string
-  email: string
-  phone?: string
-  message: string
-}
-
-const schema: ZodType<FormTypes> = z.object({
-  name: z
-    .string()
-    .min(1, "Name is required")
-    .min(3, "Name must contain at least 3 character(s)")
-    .max(20, "Name must contain at most 20 character(s)"),
-  email: z.string().email("Email must be a valid email"),
-  phone: z.string(),
-  message: z.string().min(1, "Message is required.").max(50, "Message must contain at most 50 character(s)"),
-})
+import { contactFormSchema } from "@/lib/validators/contact-form"
 
 export default function Form() {
   const formRef = useRef<HTMLFormElement>(null)
@@ -38,9 +21,18 @@ export default function Form() {
     // await new Promise(resolve => setTimeout(resolve, 1000))
 
     // validate form data
-    const parsedData = schema.safeParse({ name, email, message })
-    console.log("result", parsedData)
-    if (!parsedData.success) return parsedData.error.issues.map(issue => toast.error(issue.message))
+    const parsedData = contactFormSchema.safeParse({ name, email, message })
+    if (!parsedData.success) {
+      console.log("result", parsedData.error.issues)
+      toast.error(
+        <div className="text-base">
+          {parsedData.error.issues.map(issue => (
+            <h2>&#183; {issue.message}</h2>
+          ))}
+        </div>
+      )
+      return
+    }
 
     // // send message using a server action
     // const { error } = await sendMessage(parsedData)
