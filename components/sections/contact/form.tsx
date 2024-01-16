@@ -20,6 +20,13 @@ export default function Form() {
     const message = formData.get("from_message") as string
     const recaptcha = formData.get("g-recaptcha-response") as string
 
+    // set timeout to simulate server response
+    await new Promise(resp =>
+      setTimeout(() => {
+        resp(null)
+      }, 2000)
+    )
+
     // validate form data
     const validated = ContactFormSchema.safeParse({ name, email, message, recaptcha })
     if (!validated.success) {
@@ -52,11 +59,6 @@ export default function Form() {
         <Input className="col-span-2" type="text" id="name" placeholder="Name" name="from_name" />
         <Input className="col-span-2" type="email" id="email" placeholder="Email" name="from_email" />
         <TextArea className="col-span-4" rows={6} id="message" placeholder="Message..." name="from_message" />
-        {/* <ReCAPTCHA
-          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-          className="col-span-4 opacity-50"
-          ref={reCaptchaRef}
-        /> */}
         <MyRecaptcha className="col-span-4" ref={reCaptchaRef} />
         <Button type="submit" className="col-span-4 lg:col-span-1">
           <SendSVG className="text-xl" />

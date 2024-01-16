@@ -25,26 +25,26 @@ export default async function sendMessage(formData: unknown) {
   if (!captchaResp.success) return captchaResp
 
   // send email using the resend api
-  // const { name, email, message } = validated.data
-  // const { error } = await resend.emails.send({
-  //   from: "Portfolio Website <marcos@marcosvelasco.com>",
-  //   to: process.env.RESEND_CONTACT_EMAIL!,
-  //   subject: `${name} sent you a message from your portfolio website.`,
-  //   reply_to: email,
-  //   react: EmailTemplate(validated.data),
-  //   text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-  // })
+  const { name, email, message } = validated.data
+  const { error } = await resend.emails.send({
+    from: "Portfolio Website <marcos@marcosvelasco.com>",
+    to: process.env.RESEND_CONTACT_EMAIL!,
+    subject: `${name} sent you a message from your portfolio website.`,
+    reply_to: email,
+    react: EmailTemplate(validated.data),
+    text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
+  })
 
-  // if (error) {
-  //   return {
-  //     status: 400,
-  //     success: false,
-  //     error: {
-  //       message: "Message failed to send.",
-  //       errors: error,
-  //     },
-  //   }
-  // }
+  if (error) {
+    return {
+      status: 400,
+      success: false,
+      error: {
+        message: "Message failed to send.",
+        errors: error,
+      },
+    }
+  }
 
   return {
     status: 200,
