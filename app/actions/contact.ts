@@ -4,11 +4,11 @@ import { EmailTemplate } from "@/components/email-template"
 import { Resend } from "resend"
 
 export default async function sendMessage(formData: FormData) {
-  // console.log("form Data", typeof formData)
-
   const resend = new Resend(process.env.RESEND_API_KEY)
 
-  const { data, error } = await resend.emails.send({
+  // console.log("form Data", typeof formData)
+
+  const { error } = await resend.emails.send({
     from: "Portfolio Website <onboarding@resend.dev>",
     to: "nomadlive4@gmail.com",
     subject: "New Website Contact",
@@ -25,7 +25,6 @@ export default async function sendMessage(formData: FormData) {
     }
   }
 
-  console.log("res:", data, "and: ", error)
   return {
     status: 200,
     message: "Message sent successfully",

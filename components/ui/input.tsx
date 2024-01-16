@@ -6,7 +6,7 @@ import { useFormStatus } from "react-dom"
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const inputStyles = cva(
-  "py-3 px-4 rounded-3xl border-2 border-gray-300 placeholder:font-light placeholder-gray-400 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed col-span-2"
+  "py-3 px-4 w-full rounded-3xl border-2 border-gray-300 placeholder:font-light placeholder-gray-400 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
 )
 
 const Input = forwardRef<HTMLInputElement, InputProps>(({ className, ...props }, ref) => {

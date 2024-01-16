@@ -5,15 +5,15 @@ import { useFormStatus } from "react-dom"
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
-const inputStyles = cva(
-  "py-3 px-4 rounded-3xl border-2 border-gray-300 placeholder:font-light placeholder-gray-400 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed col-span-2"
+const textAreaStyles = cva(
+  "py-3 px-4 w-full rounded-3xl border-2 border-gray-300 placeholder:font-light placeholder-gray-400 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
 )
 
-const Input = forwardRef<HTMLTextAreaElement, TextAreaProps>(({ className, ...props }, ref) => {
+const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(({ className, ...props }, ref) => {
   const { pending } = useFormStatus()
-  return <textarea ref={ref} disabled={pending} className={cn(inputStyles(), className)} {...props} />
+  return <textarea ref={ref} disabled={pending} className={cn(textAreaStyles(), className)} {...props} />
 })
-Input.displayName = "Input"
+TextArea.displayName = "TextArea"
 
-export default Input
-export { inputStyles }
+export default TextArea
+export { textAreaStyles }

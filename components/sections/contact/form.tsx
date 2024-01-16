@@ -1,12 +1,11 @@
 "use client"
 import sendMessage from "@/app/actions/contact"
 import Button from "@/components/ui/button"
-import { SendSVG, SpinnerSVG } from "@/public/svgs"
-import { useFormStatus } from "react-dom"
+import { SendSVG } from "@/public/svgs"
 import { ZodType, z } from "zod"
-import React, { useRef, useState } from "react"
-import Input, { inputStyles } from "@/components/ui/input"
-import { cn } from "@/lib/utils"
+import { useRef } from "react"
+import Input from "@/components/ui/input"
+import TextArea from "@/components/ui/textarea"
 import { toast } from "sonner"
 
 type FormTypes = {
@@ -29,22 +28,23 @@ const schema: ZodType<FormTypes> = z.object({
 
 export default function Form() {
   const formRef = useRef<HTMLFormElement>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const handleFormSubmit = async (formData: FormData) => {
+    const name = formData.get("from_name") as string
+
     // set timeout for 1 second to simulate a real request
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    // await new Promise(resolve => setTimeout(resolve, 1000))
 
-    // const { error } = await sendMessage(formData)
+    // validate form data
+    const result = schema.safeParse(formData)
+    if (!result.success) return toast.error(result.error.message)
 
-    // if (error) {
-    //   toast.error(error.message)
-    //   return
-    // }
+    // send message using a server action
+    const { error } = await sendMessage(formData)
+    if (error) return toast.error(error.message)
 
-    const userName = (formRef.current?.children[0] as HTMLInputElement)?.value
-    toast.success(`Hi ${userName}, your message was sent successfully`)
-
+    // run success toast and reset form
+    toast.success(`Thanks ${name}, your message was sent successfully`)
     formRef.current?.reset()
   }
 
@@ -52,34 +52,23 @@ export default function Form() {
     <div className="space-y-4 max-w-xl">
       <h2 className="text-2xl font-medium">Message me</h2>
       <form ref={formRef} action={handleFormSubmit} className="grid grid-cols-4 gap-4 text-gray-600">
-        <Input type="text" id="name" placeholder="Name" name="from_name" />
-        <Input type="email" id="email" placeholder="Email" name="from_email" />
-
-        <textarea
-          className={cn(inputStyles(), "col-span-4")}
-          rows={6}
-          id="message"
-          placeholder="Message..."
-          name="from_message"
-        />
-        <FormButtons />
-      </form>
-    </div>
-  )
-}
-
-const FormButtons = () => {
-  const { pending } = useFormStatus()
-  return (
-    <Button type="submit" className="col-span-4 lg:col-span-1" disabled={pending}>
-      {!pending ? (
-        <>
+        <div className="col-span-2">
+          <Input type="text" id="name" placeholder="Name" name="from_name" />
+          {/* <span className="text-red-400 text-sm ml-5"></span> */}
+        </div>
+        <div className="col-span-2">
+          <Input type="email" id="email" placeholder="Email" name="from_email" />
+          {/* <span className="text-red-400 text-sm ml-5"></span> */}
+        </div>
+        <div className="col-span-4">
+          <TextArea className="col-span-4" rows={6} id="message" placeholder="Message..." name="from_message" />
+          {/* <span className="text-red-400 text-sm ml-5"></span> */}
+        </div>
+        <Button type="submit" className="col-span-4 lg:col-span-1">
           <SendSVG className="text-xl" />
           Send
-        </>
-      ) : (
-        <SpinnerSVG className="animate-spin text-2xl" />
-      )}
-    </Button>
+        </Button>
+      </form>
+    </div>
   )
 }
