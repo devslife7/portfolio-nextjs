@@ -2,7 +2,7 @@
 import EmailTemplate from "@/components/email-template"
 import { ContactFormSchema } from "@/lib/validators/contact-form"
 import { Resend } from "resend"
-import verifyReCaptcha from "./reCaptcha"
+// import verifyReCaptcha from "./reCaptcha"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
