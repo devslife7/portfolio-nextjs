@@ -22,7 +22,7 @@ export default async function sendMessage(formData: unknown) {
 
   // verify recaptcha
   const captchaResp = await verifyReCaptcha(validated.data.recaptcha)
-  if (!captchaResp.success) return captchaResp
+  // if (!captchaResp.success) return captchaResp
 
   // send email using the resend api
   const { name, email, message } = validated.data
