@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { socialMediaLinks } from "@/lib/data/socialMediaLinks"
 import MyTypewriter from "./MyTypewriter"
-import CallToAction from "./CallToAction"
+import CallToAction from "./call-to-action"
 
 export default function Hero() {
   const renderSocialLinks = () => {
