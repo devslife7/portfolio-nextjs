@@ -16,10 +16,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={ubuntu.className}>
-        <Toaster richColors position="top-center" expand />
+        {/* <Toaster richColors position="top-center" expand />
         <Navbar />
         {children}
-        <Footer />
+        <Footer /> */}
       </body>
     </html>
   )
