@@ -1,4 +1,4 @@
-import { cdcDayCare, dsbConstruction, futFriendsObj, proTaskObj, qatar2022 } from "../../../lib/data/Projects"
+import { cdcDayCare, dsbConstruction, futFriendsObj, proTaskObj, qatar2022 } from "../../lib/data/Projects"
 import Project from "./Project"
 
 export default function Projects() {

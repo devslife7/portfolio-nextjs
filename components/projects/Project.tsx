@@ -1,9 +1,9 @@
 "use client"
 
 import Image from "next/image"
-import { cn } from "../../../lib/utils"
-import { GitHubSVG, LinkSVG } from "../../../public/svgs"
-import { buttonStyles } from "../../ui/button"
+import { cn } from "../../lib/utils"
+import { GitHubSVG, LinkSVG } from "../../public/svgs"
+import { buttonStyles } from "../ui/button"
 
 export default function Project(props: any) {
   const {

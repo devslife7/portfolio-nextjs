@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { buttonStyles } from "../ui/button"
+import { buttonStyles } from "./ui/button"
 import { LinkSVG } from "@/public/svgs"
 import { socialMediaLinks } from "@/lib/data/socialMediaLinks"
 

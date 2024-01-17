@@ -1,4 +1,4 @@
-import { techStack, frontEnd, backEnd, tools } from "../../lib/data/Skills"
+import { techStack, frontEnd, backEnd, tools } from "../lib/data/Skills"
 
 type SkillType = {
   name: string

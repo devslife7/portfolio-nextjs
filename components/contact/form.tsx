@@ -1,5 +1,5 @@
 "use client"
-import sendMessage from "@/app/actions/contact"
+import sendMessage from "@/actions/contact"
 import Button from "@/components/ui/button"
 import { SendSVG, SpinnerSVG } from "@/public/svgs"
 import { useRef } from "react"
