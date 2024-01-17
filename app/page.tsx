@@ -12,6 +12,8 @@ export default function Home() {
       <Skills />
       <About />
       <Contact />
+
+      <div>hello</div>
     </>
   )
 }

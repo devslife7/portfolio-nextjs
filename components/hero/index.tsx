@@ -23,7 +23,7 @@ export default function Hero() {
   return (
     <section id="home" className="relative h-screen bg-black/70">
       <Image
-        src="/hero-background.jpg"
+        src="/hero-background.webp"
         fill
         priority
         alt="hero background"

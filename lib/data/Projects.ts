@@ -15,7 +15,7 @@ export const dsbConstruction = {
     "Optimized for mobile use.",
   ],
   projectLink: "https://dsbgeneralconstruction.vercel.app/",
-  projectGif: "/dsbgeneral.png",
+  projectGif: "/dsbgeneral.webp",
   projectGitHub: "https://github.com/devslife7/dsbgeneralconstruction",
 
   techStack: ["NextJS", "TailwindCSS", "Typescript", "React JS", "Postgresql"],
@@ -38,7 +38,7 @@ export const cdcDayCare = {
     "Allows potential clients to contact the business.",
   ],
   projectLink: "https://cdcdaycare.vercel.app/en/home",
-  projectGif: "/cdcdaycare.png",
+  projectGif: "/cdcdaycare.webp",
   projectGitHub: "https://github.com/devslife7/cdcdaycare",
 
   techStack: ["NextJS", "TailwindCSS", "Typescript", "React JS", "Postgresql"],
