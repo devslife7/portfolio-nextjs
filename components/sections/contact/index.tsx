@@ -1,5 +1,5 @@
 import { MailSVG, MapSVG, PersonSVG, SendSVG } from "@/public/svgs"
-// import Form from "./form"
+import Form from "./form"
 
 export default function Contact() {
   return (
@@ -45,7 +45,7 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        {/* <Form /> */}
+        <Form />
       </div>
     </section>
   )

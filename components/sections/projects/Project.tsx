@@ -96,13 +96,13 @@ export default function Project(props: any) {
             "max-w-[300px] m-auto": mobile,
           })}
         >
-          {/* <Image
+          <Image
             src={projectGif}
             className="h-full w-full object-contain"
             unoptimized={isPreviewGif}
             sizes="60vw"
             alt="Project image"
-          /> */}
+          />
         </div>
       </div>
     </div>
