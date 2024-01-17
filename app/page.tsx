@@ -7,10 +7,10 @@ import Contact from "@/components/sections/contact"
 export default function Home() {
   return (
     <>
-      <Hero />
+      {/* <Hero />
       <Projects />
       <Skills />
-      <About />
+      <About /> */}
       {/* <Contact /> */}
     </>
   )
