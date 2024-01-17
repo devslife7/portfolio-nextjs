@@ -1,16 +1,16 @@
 // import About from "@/components/sections/about"
-// import Hero from "@/components/sections/hero"
+import Hero from "@/components/sections/hero"
 // import Skills from "@/components/sections/skills"
-// import Projects from "../components/sections/projects"
+import Projects from "../components/sections/projects"
 // import Contact from "@/components/sections/contact"
 
 export default function Home() {
   return (
     <>
-      {/* <Hero />
+      <Hero />
       <Projects />
-      <Skills />
-      <About /> */}
+      {/* <Skills /> */}
+      {/* <About /> */}
       {/* <Contact /> */}
     </>
   )
