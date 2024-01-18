@@ -100,6 +100,8 @@ export default function Project(props: any) {
             src={projectGif}
             className="h-full w-full object-contain"
             unoptimized={isPreviewGif}
+            width={700}
+            height={400}
             sizes="60vw"
             alt="Project image"
           />

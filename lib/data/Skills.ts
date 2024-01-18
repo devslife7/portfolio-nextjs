@@ -34,6 +34,10 @@ export const techStack = [
     name: "TailwindCSS",
     icon: TailwindCSS,
   },
+  {
+    name: "Postgresql",
+    icon: Postgresql,
+  },
 ]
 
 export const frontEnd = [
@@ -75,10 +79,6 @@ export const backEnd = [
   {
     name: "SQLite",
     icon: SQLite,
-  },
-  {
-    name: "Postgresql",
-    icon: Postgresql,
   },
   // {
   //   name: "SQL",
