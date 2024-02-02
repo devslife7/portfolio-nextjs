@@ -101,7 +101,7 @@ export const qatar2022 = {
   description:
     "Track who is winning at Qatar World Cup 2022. A tracking website that helps my friends and I see who is winning. Official results update in real time thanks to the integration of API-FOOTBALL.",
   keyPoints: [
-    "*Over 120 visits per day while tourtitlent lasted.*",
+    "*Over 120 visits per day while tournament lasted.*",
     "Developed Mobile First.",
     "Modeled custom database schema and REST API.",
   ],
