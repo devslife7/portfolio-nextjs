@@ -66,7 +66,7 @@ export const futFriendsObj = {
 
   techStack: ["React JS", "Redux", "Ruby on Rails", "Postgresql", "Material UI"],
   hosting: ["Railway", "AWS"],
-  live: true,
+  live: false,
 }
 export const proTaskObj = {
   title: "proTaskr",
@@ -89,7 +89,7 @@ export const proTaskObj = {
 
   techStack: ["React JS", "Redux", "Ruby on Rails", "Postgresql", "Material UI"],
   hosting: ["Railway", "AWS"],
-  live: true,
+  live: false,
 }
 export const qatar2022 = {
   title: "Qatar 2022",
