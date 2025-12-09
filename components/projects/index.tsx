@@ -8,7 +8,7 @@ export default function Projects() {
         Pro<span className="text-primary">jec</span>ts
       </h2>
       <div>
-        <Project {...dsbConstruction} />
+        <Project {...companyTools} />
         <Project {...dsbConstruction} />
         <Project {...cdcDayCare} />
         <Project {...futFriendsObj} />

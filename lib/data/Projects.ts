@@ -1,3 +1,27 @@
+export const companyTools = {
+  title: "Special Cocktails",
+  lightTheme: true,
+  flipped: true,
+  mobile: false,
+  isPreviewGif: false,
+
+  description:
+    "The Cocktail Batching Tool is a specialized application designed for bartenders, caterers, or event planners who need to scale cocktail recipes from a single serving to large volumes efficiently and accurately. It manages multiple 'batch slots' allowing users to select or customize recipes and immediately calculate the large-scale quantities required, primarily in milliliters (ML), Quarts, and 750ml bottle equivalents. ",
+  keyPoints: [
+    "The app contains a pre-loaded database of cocktail recipes, which users can select. Once selected, the recipe becomes fully editable, allowing for real-time modification of ingredient names and amounts.",
+    "Calculates total ingredient volume required based on a specific, user-input number of servings (e.g., 120 cups)",
+    "Generates a clean, simplified, print-ready HTML/PDF report that includes a full Inventory Shopping List (Grand Totals of all liquid ingredients needed) and individual, easy-to-read batch sheets for each cocktail.",
+  ],
+  projectLink: "https://companytools.vercel.app/",
+  projectGif:
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE3MGMxOWE1ZWM3MmVjNjJlYzcwZmNmMTJlOTA2ZDdjODVlNDk2YyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/iRTgPcLFK51zGgoUvw/giphy.gif",
+
+  projectGitHub: "https://github.com/devslife7/companytools",
+
+  techStack: ["React JS", "Javascript", "Google Sheets"],
+  hosting: ["Next JS"],
+  live: true,
+}
 export const dsbConstruction = {
   title: "DSB General Construction",
   lightTheme: false,
@@ -106,30 +130,6 @@ export const qatar2022 = {
     "Modeled custom database schema and REST API.",
   ],
   projectLink: "https://main.d311px3iblll1g.amplifyapp.com/",
-  projectGif:
-    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE3MGMxOWE1ZWM3MmVjNjJlYzcwZmNmMTJlOTA2ZDdjODVlNDk2YyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/iRTgPcLFK51zGgoUvw/giphy.gif",
-
-  projectGitHub: "https://github.com/devslife7/qatar2022",
-
-  techStack: ["React JS", "Javascript", "API-FOOTBALL"],
-  hosting: ["AWS Amplify"],
-  live: true,
-}
-export const companyTools = {
-  title: "Special Cocktails",
-  lightTheme: false,
-  flipped: true,
-  mobile: false,
-  isPreviewGif: false,
-
-  description:
-    "Track who is winning at Qatar World Cup 2022. A tracking website that helps my friends and I see who is winning. Official results update in real time thanks to the integration of API-FOOTBALL.",
-  keyPoints: [
-    "*Over 120 visits per day while tournament lasted.*",
-    "Developed Mobile First.",
-    "Modeled custom database schema and REST API.",
-  ],
-  projectLink: "https://companytools.vercel.app/",
   projectGif:
     "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE3MGMxOWE1ZWM3MmVjNjJlYzcwZmNmMTJlOTA2ZDdjODVlNDk2YyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/iRTgPcLFK51zGgoUvw/giphy.gif",
 
