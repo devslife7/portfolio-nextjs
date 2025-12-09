@@ -1,4 +1,4 @@
-import { cdcDayCare, dsbConstruction, futFriendsObj, proTaskObj, qatar2022 } from "../../lib/data/Projects"
+import { cdcDayCare, dsbConstruction, futFriendsObj, proTaskObj, qatar2022, companyTools } from "../../lib/data/Projects"
 import Project from "./Project"
 
 export default function Projects() {
@@ -8,6 +8,7 @@ export default function Projects() {
         Pro<span className="text-primary">jec</span>ts
       </h2>
       <div>
+        <Project {...dsbConstruction} />
         <Project {...dsbConstruction} />
         <Project {...cdcDayCare} />
         <Project {...futFriendsObj} />

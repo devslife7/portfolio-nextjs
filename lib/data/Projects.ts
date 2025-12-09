@@ -115,6 +115,30 @@ export const qatar2022 = {
   hosting: ["AWS Amplify"],
   live: true,
 }
+export const companyTools = {
+  title: "Special Cocktails",
+  lightTheme: false,
+  flipped: true,
+  mobile: false,
+  isPreviewGif: false,
+
+  description:
+    "Track who is winning at Qatar World Cup 2022. A tracking website that helps my friends and I see who is winning. Official results update in real time thanks to the integration of API-FOOTBALL.",
+  keyPoints: [
+    "*Over 120 visits per day while tournament lasted.*",
+    "Developed Mobile First.",
+    "Modeled custom database schema and REST API.",
+  ],
+  projectLink: "https://companytools.vercel.app/",
+  projectGif:
+    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE3MGMxOWE1ZWM3MmVjNjJlYzcwZmNmMTJlOTA2ZDdjODVlNDk2YyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/iRTgPcLFK51zGgoUvw/giphy.gif",
+
+  projectGitHub: "https://github.com/devslife7/qatar2022",
+
+  techStack: ["React JS", "Javascript", "API-FOOTBALL"],
+  hosting: ["AWS Amplify"],
+  live: true,
+}
 // export const triviappObj = {
 //   title: "TriviApp",
 //   lightTheme: true,
