@@ -3,7 +3,7 @@ export const companyTools = {
   lightTheme: true,
   flipped: true,
   mobile: false,
-  isPreviewGif: false,
+  isPreviewGif: true,
 
   description:
     "The Cocktail Batching Tool is a specialized application designed for bartenders, caterers, or event planners who need to scale cocktail recipes from a single serving to large volumes efficiently and accurately. It manages multiple 'batch slots' allowing users to select or customize recipes and immediately calculate the large-scale quantities required, primarily in milliliters (ML), Quarts, and 750ml bottle equivalents. ",
@@ -13,7 +13,7 @@ export const companyTools = {
     "Generates a clean, simplified, print-ready HTML/PDF report that includes a full Inventory Shopping List (Grand Totals of all liquid ingredients needed) and individual, easy-to-read batch sheets for each cocktail.",
   ],
   projectLink: "https://companytools.vercel.app/",
-  projectGif: "/companytools.gif",
+  projectGif: "/companyTools.gif",
 
   projectGitHub: "https://github.com/devslife7/companytools",
 
