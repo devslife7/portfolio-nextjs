@@ -4,6 +4,7 @@ import Image from "next/image"
 import { cn } from "../../lib/utils"
 import { GitHubSVG, LinkSVG } from "../../public/svgs"
 import { buttonStyles } from "../ui/button"
+import LaptopMockup from "../ui/laptop-mockup"
 
 export default function Project(props: any) {
   const {
@@ -56,6 +57,7 @@ export default function Project(props: any) {
           "flex flex-wrap sm:justify-center lg:flex-nowrap my-container lg:justify-between py-12 sm:py-28 gap-4",
           {
             "lg:flex-row-reverse sm:gap-16": flipped,
+            "sm:gap-20 lg:gap-24": title === "Special Cocktails",
           }
         )}
       >
@@ -96,15 +98,29 @@ export default function Project(props: any) {
             "max-w-[300px] m-auto": mobile,
           })}
         >
-          <Image
-            src={projectGif}
-            className="h-full w-full object-contain"
-            unoptimized={isPreviewGif}
-            width={700}
-            height={400}
-            sizes="60vw"
-            alt="Project image"
-          />
+          {title === "Special Cocktails" ? (
+            <LaptopMockup className="w-full">
+              <Image
+                src={projectGif}
+                className="h-full w-full object-contain"
+                unoptimized={isPreviewGif}
+                width={700}
+                height={400}
+                sizes="60vw"
+                alt="Project image"
+              />
+            </LaptopMockup>
+          ) : (
+            <Image
+              src={projectGif}
+              className="h-full w-full object-contain"
+              unoptimized={isPreviewGif}
+              width={700}
+              height={400}
+              sizes="60vw"
+              alt="Project image"
+            />
+          )}
         </div>
       </div>
     </div>

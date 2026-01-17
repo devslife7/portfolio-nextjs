@@ -7,19 +7,19 @@ import Input from "@/components/ui/input"
 import TextArea from "@/components/ui/textarea"
 import { toast } from "sonner"
 import { ContactFormSchema } from "@/lib/validators/contact-form"
-import ReCAPTCHA from "react-google-recaptcha"
-import MyRecaptcha from "@/components/ui/my-recaptcha"
+// import ReCAPTCHA from "react-google-recaptcha"
+// import MyRecaptcha from "@/components/ui/my-recaptcha"
 import { useFormStatus } from "react-dom"
 
 export default function Form() {
   const formRef = useRef<HTMLFormElement>(null)
-  const reCaptchaRef = useRef<ReCAPTCHA>(null)
+  // const reCaptchaRef = useRef<ReCAPTCHA>(null)
 
   const handleFormSubmit = async (formData: FormData) => {
     const name = formData.get("from_name") as string
     const email = formData.get("from_email") as string
     const message = formData.get("from_message") as string
-    const recaptcha = formData.get("g-recaptcha-response") as string
+    // const recaptcha = formData.get("g-recaptcha-response") as string
 
     // set timeout to simulate server response
     await new Promise(resp =>
@@ -29,7 +29,8 @@ export default function Form() {
     )
 
     // validate form data
-    const validated = ContactFormSchema.safeParse({ name, email, message, recaptcha })
+    // const validated = ContactFormSchema.safeParse({ name, email, message, recaptcha })
+    const validated = ContactFormSchema.safeParse({ name, email, message })
     if (!validated.success) {
       return toast.error(
         <div className="text-sm">
@@ -50,7 +51,7 @@ export default function Form() {
     // run success toast and reset form
     toast.success(`Thanks ${name}, your message was sent successfully`)
     formRef.current?.reset()
-    reCaptchaRef.current?.reset()
+    // reCaptchaRef.current?.reset()
   }
 
   return (
@@ -60,7 +61,7 @@ export default function Form() {
         <Input className="col-span-2" type="text" id="name" placeholder="Name" name="from_name" />
         <Input className="col-span-2" type="email" id="email" placeholder="Email" name="from_email" />
         <TextArea className="col-span-4" rows={6} id="message" placeholder="Message..." name="from_message" />
-        <MyRecaptcha className="col-span-4" ref={reCaptchaRef} />
+        {/* <MyRecaptcha className="col-span-4" ref={reCaptchaRef} /> */}
         <SubmitButton />
       </form>
     </div>

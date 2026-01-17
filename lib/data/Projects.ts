@@ -13,8 +13,7 @@ export const companyTools = {
     "Generates a clean, simplified, print-ready HTML/PDF report that includes a full Inventory Shopping List (Grand Totals of all liquid ingredients needed) and individual, easy-to-read batch sheets for each cocktail.",
   ],
   projectLink: "https://companytools.vercel.app/",
-  projectGif:
-    "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE3MGMxOWE1ZWM3MmVjNjJlYzcwZmNmMTJlOTA2ZDdjODVlNDk2YyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/iRTgPcLFK51zGgoUvw/giphy.gif",
+  projectGif: "/companytools.gif",
 
   projectGitHub: "https://github.com/devslife7/companytools",
 
