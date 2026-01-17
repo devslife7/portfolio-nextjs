@@ -43,7 +43,7 @@ export default function Project(props: any) {
   const renderKeyPoints = () => {
     return keyPoints?.map((point: string, idx: number) => {
       return (
-        <div key={idx} className={cn("opacity-90 ", { "text-black/70": lightTheme })}>
+        <div key={idx} className={cn("opacity-90 ", { "text-black/70": lightTheme, "text-white/90": !lightTheme })}>
           <span>&#183;</span> {point}
         </div>
       )
@@ -51,7 +51,7 @@ export default function Project(props: any) {
   }
 
   return (
-    <div className={cn({ "bg-white": lightTheme })}>
+    <div className={cn({ "bg-white": lightTheme, "bg-black text-white": !lightTheme })}>
       <div
         className={cn(
           "flex flex-wrap sm:justify-center lg:flex-nowrap my-container lg:justify-between py-12 sm:py-28 gap-4",
@@ -63,14 +63,14 @@ export default function Project(props: any) {
       >
         <div className="max-w-[600px] ">
           <div className="text-4xl md:text-5xl font-medium text-primary mb-1">{title}</div>
-          <div className={cn("text-lg md:text-xl mb-6 opacity-90", { "text-black/70": lightTheme })}>{description}</div>
+          <div className={cn("text-lg md:text-xl mb-6 opacity-90", { "text-black/70": lightTheme, "text-white/90": !lightTheme })}>{description}</div>
           {renderKeyPoints()}
           <div className="mb-4 mt-6">
-            <p className={cn(" opacity-90", { "text-black/70": lightTheme })}>Tech Stack:</p>
+            <p className={cn(" opacity-90", { "text-black/70": lightTheme, "text-white/90": !lightTheme })}>Tech Stack:</p>
             {renderBadge(techStack)}
           </div>
           <div className="mb-8">
-            <p className={cn("opacity-90", { "text-black/70": lightTheme })}>Hosted by</p>
+            <p className={cn("opacity-90", { "text-black/70": lightTheme, "text-white/90": !lightTheme })}>Hosted by</p>
             {renderBadge(hosting)}
           </div>
           <div className="sm:space-x-4 space-y-4">
