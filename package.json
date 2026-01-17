@@ -14,7 +14,7 @@
     "@types/react-google-recaptcha": "^2.1.8",
     "class-variance-authority": "^0.7.0",
     "lucide-react": "^0.306.0",
-    "next": "14.0.4",
+    "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",
     "react-google-recaptcha": "^3.1.0",
