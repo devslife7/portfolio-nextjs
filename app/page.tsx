@@ -11,6 +11,7 @@ export default function Prototype2() {
     const touchStartX = useRef<number>(0)
     const [isPending, setIsPending] = useState(false)
     const [activeTab, setActiveTab] = useState('featured')
+    const [swipeDirection, setSwipeDirection] = useState<'left' | 'right'>('left')
 
     const projects = [
         {
@@ -107,10 +108,12 @@ export default function Prototype2() {
     const handleTouchEnd = (e: React.TouchEvent) => {
         const diff = touchStartX.current - e.changedTouches[0].clientX
         if (Math.abs(diff) < 50) return
-        const currentIndex = tabs.indexOf(activeTab as any)
+        const currentIndex = tabs.indexOf(activeTab as typeof tabs[number])
         if (diff > 0 && currentIndex < tabs.length - 1) {
+            setSwipeDirection('left')
             setActiveTab(tabs[currentIndex + 1])
         } else if (diff < 0 && currentIndex > 0) {
+            setSwipeDirection('right')
             setActiveTab(tabs[currentIndex - 1])
         }
     }
@@ -166,34 +169,7 @@ export default function Prototype2() {
             });
         });
 
-        const observer = new IntersectionObserver(
-            entries => entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('visible');
-                    observer.unobserve(e.target);
-                }
-            }),
-            { threshold: 0.1 }
-        );
-        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
-        return () => observer.disconnect();
     }, []);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            entries => entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('visible');
-                    observer.unobserve(e.target);
-                }
-            }),
-            { threshold: 0.1 }
-        );
-        const raf = requestAnimationFrame(() => {
-            document.querySelectorAll('#projects .reveal').forEach(el => observer.observe(el));
-        });
-        return () => { cancelAnimationFrame(raf); observer.disconnect(); };
-    }, [activeTab]);
 
     return (
         <>
@@ -290,23 +266,16 @@ export default function Prototype2() {
         }
         .arrow-bounce { display: inline-block; animation: bounceDown 1.6s ease-in-out infinite; }
 
-        .reveal, .reveal-left, .reveal-right {
-          opacity: 0;
-          transition: opacity 0.6s ease, transform 0.6s ease;
+        @keyframes slideInFromRight {
+          from { opacity: 0; transform: translateX(100%); }
+          to   { opacity: 1; transform: translateX(0); }
         }
-        .reveal { transform: translateY(24px); }
-        .reveal-left { transform: translateX(-24px); }
-        .reveal-right { transform: translateX(24px); }
-        .reveal.visible, .reveal-left.visible, .reveal-right.visible {
-          opacity: 1;
-          transform: none;
+        @keyframes slideInFromLeft {
+          from { opacity: 0; transform: translateX(-100%); }
+          to   { opacity: 1; transform: translateX(0); }
         }
-        @media (max-width: 767px) {
-          .project-card.reveal {
-            opacity: 1;
-            transform: none;
-          }
-        }
+        .slide-in-left  { animation: slideInFromLeft 0.3s ease forwards; }
+        .slide-in-right { animation: slideInFromRight 0.3s ease forwards; }
       `}} />
 
                 <nav className="fixed w-full z-50 bg-black border-b-2 border-neutral-900">
@@ -371,7 +340,7 @@ export default function Prototype2() {
                     style={{ touchAction: 'pan-y' }}
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="reveal flex justify-between items-end mb-6 border-b-2 border-neutral-900 pb-4">
+                        <div className="flex justify-between items-end mb-6 border-b-2 border-neutral-900 pb-4">
                             <div>
                                 <h2 className="text-3xl font-black header-text text-white">Project_Repository</h2>
                                 <p className="text-xs text-neutral-500 mt-1 uppercase">Filtering: All_Assets / High_Impact</p>
@@ -379,11 +348,16 @@ export default function Prototype2() {
                             <div className="text-xs font-mono text-primary hidden md:block">COUNT: {String(filteredProjects.length).padStart(2, '0')}</div>
                         </div>
 
-                        <div className="reveal flex border-b border-neutral-800 mb-8" style={{ transitionDelay: '100ms' }}>
+                        <div className="flex border-b border-neutral-800 mb-8">
                             {tabs.map(tab => (
                                 <button
                                     key={tab}
-                                    onClick={() => setActiveTab(tab)}
+                                    onClick={() => {
+                                        const oldIndex = tabs.indexOf(activeTab as typeof tabs[number])
+                                        const newIndex = tabs.indexOf(tab)
+                                        setSwipeDirection(newIndex > oldIndex ? 'left' : 'right')
+                                        setActiveTab(tab)
+                                    }}
                                     className={`px-4 py-2 text-[10px] font-bold uppercase font-mono tracking-widest transition-colors ${activeTab === tab
                                         ? 'text-primary border-b-2 border-primary -mb-px'
                                         : 'text-neutral-500 hover:text-white'
@@ -394,12 +368,18 @@ export default function Prototype2() {
                             ))}
                         </div>
 
-                        <div key={activeTab} className="grid grid-cols-1 md:grid-cols-2 bg-neutral-900 brutalist-border overflow-hidden" style={{ gap: '1px' }}>
+                        <div key={`${activeTab}-${swipeDirection}`} className={`grid grid-cols-1 md:grid-cols-2 bg-neutral-900 brutalist-border overflow-hidden ${swipeDirection === 'left' ? 'slide-in-right' : 'slide-in-left'}`} style={{ gap: '1px' }}>
                             {filteredProjects.map((project, index) => (
-                                <div key={project.title} className="reveal project-card bg-black p-6 group hover:bg-neutral-950 transition-colors" style={{ transitionDelay: `${index * 80}ms` }}>
-                                    <div className="aspect-video mb-6 overflow-hidden border border-neutral-800">
-                                        <img alt={project.alt} className={`w-full h-full transition-all duration-500 ${project.imgFit ?? 'object-cover'}`} src={project.src} loading={index < 2 ? 'eager' : 'lazy'} />
-                                    </div>
+                                <div key={project.title} className="bg-black p-6 group hover:bg-neutral-950 transition-colors">
+                                    {project.demo ? (
+                                        <a href={project.demo} target="_blank" rel="noopener noreferrer" className="block aspect-video mb-6 overflow-hidden border border-neutral-800 cursor-pointer">
+                                            <img alt={project.alt} className={`w-full h-full transition-all duration-500 ${project.imgFit ?? 'object-cover'}`} src={project.src} loading={index < 2 ? 'eager' : 'lazy'} />
+                                        </a>
+                                    ) : (
+                                        <div className="aspect-video mb-6 overflow-hidden border border-neutral-800">
+                                            <img alt={project.alt} className={`w-full h-full transition-all duration-500 ${project.imgFit ?? 'object-cover'}`} src={project.src} loading={index < 2 ? 'eager' : 'lazy'} />
+                                        </div>
+                                    )}
                                     <div className="flex justify-between items-start mb-4">
                                         <h3 className="text-xl font-bold text-white header-text">{project.title}</h3>
                                         <span className={`text-[10px] font-bold border px-2 py-0.5 ${project.badge.className}`}>{project.badge.text}</span>
@@ -436,9 +416,9 @@ export default function Prototype2() {
 
                 <section className="py-20 bg-neutral-950 border-y border-neutral-900" id="skills">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <h2 className="reveal text-2xl font-black header-text text-white mb-12">System_Capabilities</h2>
+                        <h2 className="text-2xl font-black header-text text-white mb-12">System_Capabilities</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                            <div className="reveal">
+                            <div>
                                 <h3 className="text-xs font-bold text-primary uppercase mb-6 tracking-widest border-b border-neutral-800 pb-2">Frontend_Dev</h3>
                                 <div className="flex flex-wrap gap-2">
                                     <span className="skill-tag">HTML5_CSS3</span>
@@ -450,7 +430,7 @@ export default function Prototype2() {
                                     <span className="skill-tag">PWA_Development</span>
                                 </div>
                             </div>
-                            <div className="reveal" style={{ transitionDelay: '150ms' }}>
+                            <div>
                                 <h3 className="text-xs font-bold text-primary uppercase mb-6 tracking-widest border-b border-neutral-800 pb-2">Backend_Eng</h3>
                                 <div className="flex flex-wrap gap-2">
                                     <span className="skill-tag">Ruby_on_Rails</span>
@@ -462,7 +442,7 @@ export default function Prototype2() {
                                     <span className="skill-tag">Serverless_Functions</span>
                                 </div>
                             </div>
-                            <div className="reveal" style={{ transitionDelay: '300ms' }}>
+                            <div>
                                 <h3 className="text-xs font-bold text-primary uppercase mb-6 tracking-widest border-b border-neutral-800 pb-2">Technical_Tools</h3>
                                 <div className="flex flex-wrap gap-2">
                                     <span className="skill-tag">Git_VersionControl</span>
@@ -480,7 +460,7 @@ export default function Prototype2() {
 
                 <section className="py-24 bg-black overflow-hidden" id="about">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
-                        <div className="reveal-left">
+                        <div>
                             <div className="text-[10px] font-bold text-neutral-600 mb-2">{"// BIOS_INIT"}</div>
                             <h2 className="text-3xl font-black header-text text-white mb-6">About_Developer</h2>
                             <div className="space-y-4 text-neutral-400 text-sm leading-relaxed">
@@ -497,7 +477,7 @@ export default function Prototype2() {
                                 </a>
                             </div>
                         </div>
-                        <div className="reveal-right relative brutalist-border p-8 bg-neutral-950">
+                        <div className="relative brutalist-border p-8 bg-neutral-950">
                             <div className="absolute -top-3 -right-3 bg-primary text-black text-[10px] font-bold px-2 py-0.5">ENTITY_ID: 10443</div>
                             <div className="font-mono text-[11px] leading-6">
                                 <p className="text-primary font-bold">const dev = {'{'}</p>
@@ -516,7 +496,7 @@ export default function Prototype2() {
                 <section className="py-20 bg-neutral-950" id="contact">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="grid md:grid-cols-2 gap-12">
-                            <div className="reveal-left">
+                            <div>
                                 <h2 className="text-3xl font-black header-text text-white mb-8">Establish_Link</h2>
                                 <div className="space-y-8">
                                     <div className="flex items-center gap-4">
@@ -543,7 +523,7 @@ export default function Prototype2() {
                                 </div>
                             </div>
 
-                            <div className="reveal-right brutalist-border p-1 bg-black">
+                            <div className="brutalist-border p-1 bg-black">
                                 <div className="bg-neutral-900/50 p-6 md:p-8">
                                     <h3 className="text-sm font-bold text-white uppercase mb-6 tracking-widest border-b border-neutral-800 pb-2">Direct_Message</h3>
                                     <form ref={formRef} className="space-y-4" onSubmit={handleFormSubmit}>
