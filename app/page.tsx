@@ -1,14 +1,100 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../tailwind.config.js';
+import { Toaster, toast } from 'sonner';
+import sendMessage from '@/actions/contact';
+import { ContactFormSchema } from '@/lib/validators/contact-form';
 
 const { theme } = resolveConfig(tailwindConfig);
 const primaryColor = (theme.colors as any).primary.DEFAULT as string;
 
 export default function Prototype2() {
+    const formRef = useRef<HTMLFormElement>(null)
+    const [isPending, setIsPending] = useState(false)
+    const [activeTab, setActiveTab] = useState('all')
+
+    const projects = [
+        {
+            alt: 'Cocktail App', src: '/companyTools.gif',
+            title: 'Special Cocktails',
+            badge: { text: 'COMPLETED', className: 'border-green-500 text-green-500' },
+            type: 'B2B Utility', stack: 'React / G-Sheets', metric: 'Real-time Calc', core: 'PDF Automation',
+            description: 'Batching tool for bartenders. Calculates large-scale quantities and generates reports from custom recipes.',
+            demo: 'https://companytools.vercel.app/',
+            source: 'https://github.com/devslife7/companytools',
+            categories: ['featured', 'tools'],
+        },
+        {
+            alt: 'Construction Website', src: '/dsbgeneral.webp',
+            title: 'DSB Construction',
+            badge: { text: 'MAINTENANCE', className: 'border-primary text-primary' },
+            type: 'Enterprise Showcase', stack: 'Next.js / Postgres', metric: 'SSR Validation', core: 'Review CRUD',
+            description: 'Business portal with admin media handling and server-side validation for customer interactions.',
+            demo: 'https://dsbgeneralconstruction.vercel.app/',
+            source: 'https://github.com/devslife7/dsbgeneralconstruction',
+            categories: ['featured', 'commercial'],
+        },
+        {
+            alt: 'Daycare Website', src: '/cdcdaycare.webp',
+            title: 'CDC DayCare',
+            badge: { text: 'COMPLETED', className: 'border-green-500 text-green-500' },
+            type: 'CMS Portal', stack: 'Next.js / Tailwind', metric: 'Multi-Language', core: 'Lead Capture',
+            description: 'Educational facility landing with i18n support and optimized mobile communication flows.',
+            demo: 'https://cdcdaycare.vercel.app/en/home',
+            source: 'https://github.com/devslife7/cdcdaycare',
+            categories: ['commercial'],
+        },
+        {
+            alt: 'Soccer App', src: 'https://media.giphy.com/media/HeeRZi4hagLEl3qPIY/giphy.gif',
+            title: 'FutFriends',
+            badge: { text: 'LEGACY', className: 'border-yellow-500 text-yellow-500' },
+            type: 'Social Platform', stack: 'Rails / React', metric: 'JWT Secure', core: 'REST API',
+            description: 'Match-finding platform for football enthusiasts. Custom database schema with complex user relationships.',
+            demo: null,
+            source: 'https://github.com/devslife7/FutHub',
+            categories: ['legacy'],
+        },
+    ]
+
+    const filteredProjects = activeTab === 'all' ? projects : projects.filter(p => p.categories.includes(activeTab))
+
+    const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        const name = formData.get('from_name') as string
+        const email = formData.get('from_email') as string
+        const message = formData.get('from_message') as string
+
+        const validated = ContactFormSchema.safeParse({ name, email, message })
+        if (!validated.success) {
+            toast.error(
+                <div className="text-sm">
+                    {validated.error.issues.map((issue, idx) => (
+                        <p key={idx}>&#183; {issue.message}</p>
+                    ))}
+                </div>
+            )
+            return
+        }
+
+        setIsPending(true)
+        try {
+            const resp = await sendMessage(validated.data)
+            if (!resp.success) {
+                toast.error('Server error. Check console for more details.')
+                console.error(resp.error)
+                return
+            }
+            toast.success(`Thanks ${name}, your message was sent successfully`)
+            formRef.current?.reset()
+        } finally {
+            setIsPending(false)
+        }
+    }
+
     useEffect(() => {
         // Smooth scrolling logic
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -28,6 +114,8 @@ export default function Prototype2() {
     }, []);
 
     return (
+        <>
+        <Toaster richColors />
         <div className="proto-root bg-[#0a0a0a] text-[#d4d4d4] antialiased selection:bg-primary selection:text-black min-h-screen font-mono">
             <style dangerouslySetInnerHTML={{
                 __html: `
@@ -144,101 +232,55 @@ export default function Prototype2() {
 
             <section className="py-20 bg-black" id="projects">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between items-end mb-12 border-b-2 border-neutral-900 pb-4">
+                    <div className="flex justify-between items-end mb-6 border-b-2 border-neutral-900 pb-4">
                         <div>
                             <h2 className="text-3xl font-black header-text text-white">Project_Repository</h2>
                             <p className="text-xs text-neutral-500 mt-1 uppercase">Filtering: All_Assets / High_Impact</p>
                         </div>
-                        <div className="text-xs font-mono text-primary hidden md:block">COUNT: 04</div>
+                        <div className="text-xs font-mono text-primary hidden md:block">COUNT: {String(filteredProjects.length).padStart(2, '0')}</div>
+                    </div>
+
+                    <div className="flex border-b border-neutral-800 mb-8">
+                        {['all', 'featured', 'commercial', 'tools', 'legacy'].map(tab => (
+                            <button
+                                key={tab}
+                                onClick={() => setActiveTab(tab)}
+                                className={`px-4 py-2 text-[10px] font-bold uppercase font-mono tracking-widest transition-colors ${
+                                    activeTab === tab
+                                        ? 'text-primary border-b-2 border-primary -mb-px'
+                                        : 'text-neutral-500 hover:text-white'
+                                }`}
+                            >
+                                {tab}
+                            </button>
+                        ))}
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 bg-neutral-900 brutalist-border overflow-hidden" style={{ gap: '1px' }}>
-                        {/* Project 1 */}
-                        <div className="bg-black p-6 group hover:bg-neutral-950 transition-colors border-b md:border-b-0 md:border-r border-neutral-900">
-                            <div className="aspect-video mb-6 overflow-hidden border border-neutral-800">
-                                <img alt="Cocktail App" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="/prototype2/cocktails.jpg" />
+                        {filteredProjects.map(project => (
+                            <div key={project.title} className="bg-black p-6 group hover:bg-neutral-950 transition-colors">
+                                <div className="aspect-video mb-6 overflow-hidden border border-neutral-800">
+                                    <img alt={project.alt} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src={project.src} />
+                                </div>
+                                <div className="flex justify-between items-start mb-4">
+                                    <h3 className="text-xl font-bold text-white header-text">{project.title}</h3>
+                                    <span className={`text-[10px] font-bold border px-2 py-0.5 ${project.badge.className}`}>{project.badge.text}</span>
+                                </div>
+                                <div className="grid grid-cols-2 gap-4 text-[10px] font-mono mb-6 uppercase text-neutral-500">
+                                    <div><span className="text-white block">TYPE:</span> {project.type}</div>
+                                    <div><span className="text-white block">STACK:</span> {project.stack}</div>
+                                    <div><span className="text-white block">METRIC:</span> {project.metric}</div>
+                                    <div><span className="text-white block">CORE:</span> {project.core}</div>
+                                </div>
+                                <p className="text-sm text-neutral-400 mb-6 line-clamp-2">{project.description}</p>
+                                <div className="flex gap-4">
+                                    {project.demo && (
+                                        <a className="text-xs font-bold uppercase border border-white px-4 py-2 hover:bg-white hover:text-black transition-all" href={project.demo} target="_blank" rel="noopener noreferrer">Demo</a>
+                                    )}
+                                    <a className="text-xs font-bold uppercase text-neutral-500 hover:text-white flex items-center gap-1" href={project.source} target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i> Source</a>
+                                </div>
                             </div>
-                            <div className="flex justify-between items-start mb-4">
-                                <h3 className="text-xl font-bold text-white header-text">Special Cocktails</h3>
-                                <span className="text-[10px] font-bold border border-green-500 text-green-500 px-2 py-0.5">COMPLETED</span>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4 text-[10px] font-mono mb-6 uppercase text-neutral-500">
-                                <div><span className="text-white block">TYPE:</span> B2B Utility</div>
-                                <div><span className="text-white block">STACK:</span> React / G-Sheets</div>
-                                <div><span className="text-white block">METRIC:</span> Real-time Calc</div>
-                                <div><span className="text-white block">CORE:</span> PDF Automation</div>
-                            </div>
-                            <p className="text-sm text-neutral-400 mb-6 line-clamp-2">Batching tool for bartenders. Calculates large-scale quantities and generates reports from custom recipes.</p>
-                            <div className="flex gap-4">
-                                <a className="text-xs font-bold uppercase border border-white px-4 py-2 hover:bg-white hover:text-black transition-all" href="#">Demo</a>
-                                <a className="text-xs font-bold uppercase text-neutral-500 hover:text-white flex items-center gap-1" href="#"><i className="fab fa-github"></i> Source</a>
-                            </div>
-                        </div>
-
-                        {/* Project 2 */}
-                        <div className="bg-black p-6 group hover:bg-neutral-950 transition-colors">
-                            <div className="aspect-video mb-6 overflow-hidden border border-neutral-800">
-                                <img alt="Construction Website" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="/prototype2/construction.jpg" />
-                            </div>
-                            <div className="flex justify-between items-start mb-4">
-                                <h3 className="text-xl font-bold text-white header-text">DSB Construction</h3>
-                                <span className="text-[10px] font-bold border border-primary text-primary px-2 py-0.5">MAINTENANCE</span>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4 text-[10px] font-mono mb-6 uppercase text-neutral-500">
-                                <div><span className="text-white block">TYPE:</span> Enterprise Showcase</div>
-                                <div><span className="text-white block">STACK:</span> Next.js / Postgres</div>
-                                <div><span className="text-white block">METRIC:</span> SSR Validation</div>
-                                <div><span className="text-white block">CORE:</span> Review CRUD</div>
-                            </div>
-                            <p className="text-sm text-neutral-400 mb-6 line-clamp-2">Business portal with admin media handling and server-side validation for customer interactions.</p>
-                            <div className="flex gap-4">
-                                <a className="text-xs font-bold uppercase border border-white px-4 py-2 hover:bg-white hover:text-black transition-all" href="#">Demo</a>
-                                <a className="text-xs font-bold uppercase text-neutral-500 hover:text-white flex items-center gap-1" href="#"><i className="fab fa-github"></i> Source</a>
-                            </div>
-                        </div>
-
-                        {/* Project 3 */}
-                        <div className="bg-black p-6 group hover:bg-neutral-950 transition-colors border-t border-neutral-900 md:border-r">
-                            <div className="aspect-video mb-6 overflow-hidden border border-neutral-800">
-                                <img alt="Daycare Website" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="/prototype2/daycare.jpg" />
-                            </div>
-                            <div className="flex justify-between items-start mb-4">
-                                <h3 className="text-xl font-bold text-white header-text">CDC DayCare</h3>
-                                <span className="text-[10px] font-bold border border-green-500 text-green-500 px-2 py-0.5">COMPLETED</span>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4 text-[10px] font-mono mb-6 uppercase text-neutral-500">
-                                <div><span className="text-white block">TYPE:</span> CMS Portal</div>
-                                <div><span className="text-white block">STACK:</span> Next.js / Tailwind</div>
-                                <div><span className="text-white block">METRIC:</span> Multi-Language</div>
-                                <div><span className="text-white block">CORE:</span> Lead Capture</div>
-                            </div>
-                            <p className="text-sm text-neutral-400 mb-6 line-clamp-2">Educational facility landing with i18n support and optimized mobile communication flows.</p>
-                            <div className="flex gap-4">
-                                <a className="text-xs font-bold uppercase border border-white px-4 py-2 hover:bg-white hover:text-black transition-all" href="#">Demo</a>
-                                <a className="text-xs font-bold uppercase text-neutral-500 hover:text-white flex items-center gap-1" href="#"><i className="fab fa-github"></i> Source</a>
-                            </div>
-                        </div>
-
-                        {/* Project 4 */}
-                        <div className="bg-black p-6 group hover:bg-neutral-950 transition-colors border-t border-neutral-900">
-                            <div className="aspect-video mb-6 overflow-hidden border border-neutral-800">
-                                <img alt="Soccer App" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="/prototype2/soccer.jpg" />
-                            </div>
-                            <div className="flex justify-between items-start mb-4">
-                                <h3 className="text-xl font-bold text-white header-text">FutFriends</h3>
-                                <span className="text-[10px] font-bold border border-yellow-500 text-yellow-500 px-2 py-0.5">LEGACY</span>
-                            </div>
-                            <div className="grid grid-cols-2 gap-4 text-[10px] font-mono mb-6 uppercase text-neutral-500">
-                                <div><span className="text-white block">TYPE:</span> Social Platform</div>
-                                <div><span className="text-white block">STACK:</span> Rails / React</div>
-                                <div><span className="text-white block">METRIC:</span> JWT Secure</div>
-                                <div><span className="text-white block">CORE:</span> REST API</div>
-                            </div>
-                            <p className="text-sm text-neutral-400 mb-6 line-clamp-2">Match-finding platform for football enthusiasts. Custom database schema with complex user relationships.</p>
-                            <div className="flex gap-4">
-                                <a className="text-xs font-bold uppercase text-neutral-500 hover:text-white flex items-center gap-1" href="#"><i className="fab fa-github"></i> Source</a>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </section>
@@ -255,7 +297,8 @@ export default function Prototype2() {
                                 <span className="skill-tag">React_NextJS</span>
                                 <span className="skill-tag">Tailwind_Architecture</span>
                                 <span className="skill-tag">Typescript_Static</span>
-                                <span className="skill-tag">Bootstrap_Framework</span>
+                                <span className="skill-tag">SSR_Rendering</span>
+                                <span className="skill-tag">PWA_Development</span>
                             </div>
                         </div>
                         <div>
@@ -266,7 +309,8 @@ export default function Prototype2() {
                                 <span className="skill-tag">PostgreSQL_DB</span>
                                 <span className="skill-tag">RESTful_Architecture</span>
                                 <span className="skill-tag">JWT_Security</span>
-                                <span className="skill-tag">Express_Framework</span>
+                                <span className="skill-tag">OAuth_Integration</span>
+                                <span className="skill-tag">Serverless_Functions</span>
                             </div>
                         </div>
                         <div>
@@ -277,6 +321,8 @@ export default function Prototype2() {
                                 <span className="skill-tag">Figma_Prototyping</span>
                                 <span className="skill-tag">Docker_Containers</span>
                                 <span className="skill-tag">Agile_Workflows</span>
+                                <span className="skill-tag">Vercel_Deployment</span>
+                                <span className="skill-tag">Blob_Storage</span>
                             </div>
                         </div>
                     </div>
@@ -351,22 +397,23 @@ export default function Prototype2() {
                         <div className="brutalist-border p-1 bg-black">
                             <div className="bg-neutral-900/50 p-6 md:p-8">
                                 <h3 className="text-sm font-bold text-white uppercase mb-6 tracking-widest border-b border-neutral-800 pb-2">Direct_Message</h3>
-                                <form action="#" className="space-y-4" method="POST" onSubmit={(e) => e.preventDefault()}>
+                                <form ref={formRef} className="space-y-4" onSubmit={handleFormSubmit}>
                                     <div>
                                         <label className="block text-[10px] text-neutral-500 uppercase mb-1 font-mono">User_Identifier</label>
-                                        <input className="w-full text-sm py-2 px-3 text-white focus:outline-none" placeholder="FULL NAME" type="text" />
+                                        <input className="w-full text-sm py-2 px-3 text-white focus:outline-none" placeholder="FULL NAME" type="text" name="from_name" />
                                     </div>
                                     <div>
                                         <label className="block text-[10px] text-neutral-500 uppercase mb-1 font-mono">Communication_Node</label>
-                                        <input className="w-full text-sm py-2 px-3 text-white focus:outline-none" placeholder="EMAIL_ADDRESS" type="email" />
+                                        <input className="w-full text-sm py-2 px-3 text-white focus:outline-none" placeholder="EMAIL_ADDRESS" type="email" name="from_email" />
                                     </div>
                                     <div>
                                         <label className="block text-[10px] text-neutral-500 uppercase mb-1 font-mono">Payload_Data</label>
-                                        <textarea className="w-full text-sm py-2 px-3 text-white focus:outline-none resize-none" placeholder="MESSAGE_CONTENTS" rows={4}></textarea>
+                                        <textarea className="w-full text-sm py-2 px-3 text-white focus:outline-none resize-none" placeholder="MESSAGE_CONTENTS" rows={4} name="from_message"></textarea>
                                     </div>
                                     <div>
-                                        <button className="w-full py-3 bg-primary text-black font-black uppercase text-xs hover:bg-white transition-all flex items-center justify-center gap-2" type="submit">
-                                            <span className="material-symbols-outlined text-sm">send</span> EXECUTE_SEND
+                                        <button className="w-full py-3 bg-primary text-black font-black uppercase text-xs hover:bg-white transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed" type="submit" disabled={isPending}>
+                                            <span className="material-symbols-outlined text-sm">{isPending ? 'hourglass_empty' : 'send'}</span>
+                                            {isPending ? 'TRANSMITTING...' : 'EXECUTE_SEND'}
                                         </button>
                                     </div>
                                 </form>
@@ -384,12 +431,13 @@ export default function Prototype2() {
                         © 2024 SERIAL_NO_889241. ALL RIGHTS RESERVED.
                     </div>
                     <div className="flex space-x-6 text-neutral-400">
-                        <a className="hover:text-primary" href="#"><i className="fab fa-github"></i></a>
-                        <a className="hover:text-primary" href="#"><i className="fab fa-linkedin"></i></a>
-                        <a className="hover:text-primary" href="#"><i className="fab fa-twitter"></i></a>
+                        <a className="hover:text-primary" href="https://github.com/devslife7" target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i></a>
+                        <a className="hover:text-primary" href="https://www.linkedin.com/in/marcosvelasco/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
+                        <a className="hover:text-primary" href="https://www.facebook.com/marcos.velasco.5/" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook"></i></a>
                     </div>
                 </div>
             </footer>
         </div>
+        </>
     );
 }

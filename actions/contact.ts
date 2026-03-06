@@ -19,14 +19,16 @@ export default async function sendMessage(formData: unknown) {
       },
     }
   }
-  // verify recaptcha
-  const captchaResp = await verifyReCaptcha(validated.data.recaptcha)
-  if (!captchaResp.success) return captchaResp
+  // verify recaptcha if provided
+  if (validated.data.recaptcha) {
+    const captchaResp = await verifyReCaptcha(validated.data.recaptcha)
+    if (!captchaResp.success) return captchaResp
+  }
   // send email using the resend api
   const { name, email, message } = validated.data
   const { error } = await resend.emails.send({
-    from: "Portfolio Website <marcos@marcosvelasco.com>",
-    to: process.env.RESEND_CONTACT_EMAIL!,
+    from: `Portfolio <${process.env.FROM_EMAIL!}>`,
+    to: process.env.CONTACT_EMAIL!,
     subject: `${name} sent you a message from your portfolio website.`,
     reply_to: email,
     react: EmailTemplate(validated.data),
