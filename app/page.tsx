@@ -13,6 +13,7 @@ const primaryColor = (theme.colors as any).primary.DEFAULT as string;
 
 export default function Prototype2() {
     const formRef = useRef<HTMLFormElement>(null)
+    const touchStartX = useRef<number>(0)
     const [isPending, setIsPending] = useState(false)
     const [activeTab, setActiveTab] = useState('featured')
 
@@ -23,7 +24,7 @@ export default function Prototype2() {
             badge: { text: 'FEATURED', className: 'border-featured text-featured' },
             type: 'B2B Utility', stack: 'React / G-Sheets', metric: 'Real-time Calc', core: 'PDF Automation',
             description: 'Batching tool for bartenders. Calculates large-scale quantities and generates reports from custom recipes.',
-            demo: 'https://companytools.vercel.app/',
+            demo: 'https://internaltoolsdc.com/',
             source: 'private',
             categories: ['featured', 'tools'],
         },
@@ -100,7 +101,24 @@ export default function Prototype2() {
         },
     ]
 
+    const tabs = ['all', 'featured', 'commercial', 'tools', 'legacy'] as const
+
     const filteredProjects = activeTab === 'all' ? projects : projects.filter(p => p.categories.includes(activeTab))
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        touchStartX.current = e.touches[0].clientX
+    }
+
+    const handleTouchEnd = (e: React.TouchEvent) => {
+        const diff = touchStartX.current - e.changedTouches[0].clientX
+        if (Math.abs(diff) < 50) return
+        const currentIndex = tabs.indexOf(activeTab as any)
+        if (diff > 0 && currentIndex < tabs.length - 1) {
+            setActiveTab(tabs[currentIndex + 1])
+        } else if (diff < 0 && currentIndex > 0) {
+            setActiveTab(tabs[currentIndex - 1])
+        }
+    }
 
     const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -152,7 +170,33 @@ export default function Prototype2() {
                 }
             });
         });
+
+        const observer = new IntersectionObserver(
+            entries => entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            }),
+            { threshold: 0.1 }
+        );
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+        return () => observer.disconnect();
     }, []);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            entries => entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    observer.unobserve(e.target);
+                }
+            }),
+            { threshold: 0.1 }
+        );
+        document.querySelectorAll('.reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible)').forEach(el => observer.observe(el));
+        return () => observer.disconnect();
+    }, [activeTab]);
 
     return (
         <>
@@ -215,6 +259,55 @@ export default function Prototype2() {
         .hover\\:text-primary:hover { color: var(--primary) !important; }
         .hover\\:bg-primary:hover { background-color: var(--primary) !important; }
         .decoration-primary { text-decoration-color: var(--primary) !important; }
+
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUpSubtle {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 0.2; transform: translateY(0); }
+        }
+        @keyframes growDown {
+          from { transform: scaleY(0); }
+          to   { transform: scaleY(1); }
+        }
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50%       { opacity: 0; }
+        }
+        .hero-fade { opacity: 0; animation: fadeInUp 0.6s ease forwards; }
+        .hero-fade-subtle { opacity: 0; animation: fadeInUpSubtle 0.6s ease forwards; }
+        .border-grow-wrapper { position: relative; }
+        .border-grow-wrapper::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          bottom: 0;
+          width: 4px;
+          background: var(--primary);
+          transform-origin: top;
+          animation: growDown 0.6s ease forwards;
+        }
+        .blink-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: black; margin-right: 6px; animation: blink 1.2s ease infinite; vertical-align: middle; }
+        @keyframes bounceDown {
+          0%, 100% { transform: translateY(0); }
+          50%       { transform: translateY(4px); }
+        }
+        .arrow-bounce { display: inline-block; animation: bounceDown 1.6s ease-in-out infinite; }
+
+        .reveal, .reveal-left, .reveal-right {
+          opacity: 0;
+          transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal { transform: translateY(24px); }
+        .reveal-left { transform: translateX(-24px); }
+        .reveal-right { transform: translateX(24px); }
+        .reveal.visible, .reveal-left.visible, .reveal-right.visible {
+          opacity: 1;
+          transform: none;
+        }
       `}} />
 
                 <nav className="fixed w-full z-50 bg-black border-b-2 border-neutral-900">
@@ -241,18 +334,20 @@ export default function Prototype2() {
                 <header className="relative min-h-screen flex items-center justify-center overflow-hidden grid-bg pt-14" id="home">
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black pointer-events-none" style={{ opacity: 0.9 }}></div>
                     <div className="relative z-10 max-w-7xl mx-auto px-4 w-full">
-                        <div className="max-w-4xl border-l-4 border-primary pl-6 md:pl-10">
-                            <div className="inline-block bg-primary text-black text-[10px] font-bold px-2 py-0.5 mb-4">STATUS: ONLINE</div>
-                            <h1 className="text-5xl md:text-8xl font-black header-text text-white leading-none mb-4">
+                        <div className="border-grow-wrapper max-w-4xl pl-6 md:pl-10">
+                            <div className="inline-block bg-primary text-black text-[10px] font-bold px-2 py-0.5 mb-4 hero-fade" style={{ animationDelay: '0ms' }}>
+                                <span className="blink-dot" />STATUS: ONLINE
+                            </div>
+                            <h1 className="text-5xl md:text-8xl font-black header-text text-white leading-none mb-4 hero-fade" style={{ animationDelay: '150ms' }}>
                                 MARCOS<br />VELASCO
                             </h1>
-                            <p className="text-lg md:text-2xl font-light text-neutral-400 mb-8 max-w-2xl leading-tight">
+                            <p className="text-lg md:text-2xl font-light text-neutral-400 mb-8 max-w-2xl leading-tight hero-fade" style={{ animationDelay: '300ms' }}>
                                 <span className="text-white font-bold">TECHNICAL VIRTUOSO</span> <br />
                                 Engineering high-performance full-stack systems with data-driven precision.
                             </p>
-                            <div className="flex flex-wrap gap-4 items-center">
+                            <div className="flex flex-wrap gap-4 items-center hero-fade" style={{ animationDelay: '450ms' }}>
                                 <a className="px-6 py-3 bg-white text-black font-bold uppercase text-sm hover:bg-primary transition-colors" href="#projects">
-                                    View Projects ↓
+                                    View Projects <span className="arrow-bounce">↓</span>
                                 </a>
                                 <div className="flex gap-4">
                                     <a className="text-neutral-500 hover:text-white" href="https://github.com/devslife7" target="_blank" rel="noopener noreferrer"><i className="fab fa-github text-xl"></i></a>
@@ -261,7 +356,7 @@ export default function Prototype2() {
                             </div>
                         </div>
                     </div>
-                    <div className="absolute bottom-10 right-10 hidden lg:block opacity-20">
+                    <div className="absolute bottom-10 right-10 hidden lg:block hero-fade-subtle" style={{ animationDelay: '600ms' }}>
                         <div className="text-[10px] space-y-1 font-mono">
                             <p>&gt; SYSTEM: 64-BIT ARCHITECTURE</p>
                             <p>&gt; KERNEL: OPTIMIZED</p>
@@ -271,9 +366,12 @@ export default function Prototype2() {
                     </div>
                 </header>
 
-                <section className="py-20 bg-black" id="projects">
+                <section className="py-20 bg-black" id="projects"
+                    onTouchStart={handleTouchStart}
+                    onTouchEnd={handleTouchEnd}
+                >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex justify-between items-end mb-6 border-b-2 border-neutral-900 pb-4">
+                        <div className="reveal flex justify-between items-end mb-6 border-b-2 border-neutral-900 pb-4">
                             <div>
                                 <h2 className="text-3xl font-black header-text text-white">Project_Repository</h2>
                                 <p className="text-xs text-neutral-500 mt-1 uppercase">Filtering: All_Assets / High_Impact</p>
@@ -281,8 +379,8 @@ export default function Prototype2() {
                             <div className="text-xs font-mono text-primary hidden md:block">COUNT: {String(filteredProjects.length).padStart(2, '0')}</div>
                         </div>
 
-                        <div className="flex border-b border-neutral-800 mb-8">
-                            {['all', 'featured', 'commercial', 'tools', 'legacy'].map(tab => (
+                        <div className="reveal flex border-b border-neutral-800 mb-8" style={{ transitionDelay: '100ms' }}>
+                            {tabs.map(tab => (
                                 <button
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
@@ -297,8 +395,8 @@ export default function Prototype2() {
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 bg-neutral-900 brutalist-border overflow-hidden" style={{ gap: '1px' }}>
-                            {filteredProjects.map(project => (
-                                <div key={project.title} className="bg-black p-6 group hover:bg-neutral-950 transition-colors">
+                            {filteredProjects.map((project, index) => (
+                                <div key={project.title} className="reveal bg-black p-6 group hover:bg-neutral-950 transition-colors" style={{ transitionDelay: `${index * 80}ms` }}>
                                     <div className="aspect-video mb-6 overflow-hidden border border-neutral-800">
                                         <img alt={project.alt} className={`w-full h-full transition-all duration-500 ${project.imgFit ?? 'object-cover'}`} src={project.src} />
                                     </div>
@@ -338,9 +436,9 @@ export default function Prototype2() {
 
                 <section className="py-20 bg-neutral-950 border-y border-neutral-900" id="skills">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <h2 className="text-2xl font-black header-text text-white mb-12">System_Capabilities</h2>
+                        <h2 className="reveal text-2xl font-black header-text text-white mb-12">System_Capabilities</h2>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                            <div>
+                            <div className="reveal">
                                 <h3 className="text-xs font-bold text-primary uppercase mb-6 tracking-widest border-b border-neutral-800 pb-2">Frontend_Dev</h3>
                                 <div className="flex flex-wrap gap-2">
                                     <span className="skill-tag">HTML5_CSS3</span>
@@ -352,7 +450,7 @@ export default function Prototype2() {
                                     <span className="skill-tag">PWA_Development</span>
                                 </div>
                             </div>
-                            <div>
+                            <div className="reveal" style={{ transitionDelay: '150ms' }}>
                                 <h3 className="text-xs font-bold text-primary uppercase mb-6 tracking-widest border-b border-neutral-800 pb-2">Backend_Eng</h3>
                                 <div className="flex flex-wrap gap-2">
                                     <span className="skill-tag">Ruby_on_Rails</span>
@@ -364,7 +462,7 @@ export default function Prototype2() {
                                     <span className="skill-tag">Serverless_Functions</span>
                                 </div>
                             </div>
-                            <div>
+                            <div className="reveal" style={{ transitionDelay: '300ms' }}>
                                 <h3 className="text-xs font-bold text-primary uppercase mb-6 tracking-widest border-b border-neutral-800 pb-2">Technical_Tools</h3>
                                 <div className="flex flex-wrap gap-2">
                                     <span className="skill-tag">Git_VersionControl</span>
@@ -382,7 +480,7 @@ export default function Prototype2() {
 
                 <section className="py-24 bg-black overflow-hidden" id="about">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
-                        <div>
+                        <div className="reveal-left">
                             <div className="text-[10px] font-bold text-neutral-600 mb-2">{"// BIOS_INIT"}</div>
                             <h2 className="text-3xl font-black header-text text-white mb-6">About_Developer</h2>
                             <div className="space-y-4 text-neutral-400 text-sm leading-relaxed">
@@ -399,7 +497,7 @@ export default function Prototype2() {
                                 </a>
                             </div>
                         </div>
-                        <div className="relative brutalist-border p-8 bg-neutral-950">
+                        <div className="reveal-right relative brutalist-border p-8 bg-neutral-950">
                             <div className="absolute -top-3 -right-3 bg-primary text-black text-[10px] font-bold px-2 py-0.5">ENTITY_ID: 10443</div>
                             <div className="font-mono text-[11px] leading-6">
                                 <p className="text-primary font-bold">const dev = {'{'}</p>
@@ -418,7 +516,7 @@ export default function Prototype2() {
                 <section className="py-20 bg-neutral-950" id="contact">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="grid md:grid-cols-2 gap-12">
-                            <div>
+                            <div className="reveal-left">
                                 <h2 className="text-3xl font-black header-text text-white mb-8">Establish_Link</h2>
                                 <div className="space-y-8">
                                     <div className="flex items-center gap-4">
@@ -445,7 +543,7 @@ export default function Prototype2() {
                                 </div>
                             </div>
 
-                            <div className="brutalist-border p-1 bg-black">
+                            <div className="reveal-right brutalist-border p-1 bg-black">
                                 <div className="bg-neutral-900/50 p-6 md:p-8">
                                     <h3 className="text-sm font-bold text-white uppercase mb-6 tracking-widest border-b border-neutral-800 pb-2">Direct_Message</h3>
                                     <form ref={formRef} className="space-y-4" onSubmit={handleFormSubmit}>

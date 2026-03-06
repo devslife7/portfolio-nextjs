@@ -12,7 +12,7 @@ export const companyTools = {
     "Calculates total ingredient volume required based on a specific, user-input number of servings (e.g., 120 cups)",
     "Generates a clean, simplified, print-ready HTML/PDF report that includes a full Inventory Shopping List (Grand Totals of all liquid ingredients needed) and individual, easy-to-read batch sheets for each cocktail.",
   ],
-  projectLink: "https://companytools.vercel.app/",
+  projectLink: "https://internaltoolsdc.com/",
   projectGif: "/companyTools.gif",
 
   projectGitHub: "https://github.com/devslife7/companytools",
