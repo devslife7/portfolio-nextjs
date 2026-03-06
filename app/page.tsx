@@ -2,6 +2,11 @@
 
 import React, { useEffect } from 'react';
 import Head from 'next/head';
+import resolveConfig from 'tailwindcss/resolveConfig';
+import tailwindConfig from '../tailwind.config.js';
+
+const { theme } = resolveConfig(tailwindConfig);
+const primaryColor = (theme.colors as any).primary.DEFAULT as string;
 
 export default function Prototype2() {
     useEffect(() => {
@@ -23,7 +28,7 @@ export default function Prototype2() {
     }, []);
 
     return (
-        <div className="proto-root bg-[#0a0a0a] text-[#d4d4d4] antialiased selection:bg-[#f97316] selection:text-black min-h-screen font-mono">
+        <div className="proto-root bg-[#0a0a0a] text-[#d4d4d4] antialiased selection:bg-primary selection:text-black min-h-screen font-mono">
             <style dangerouslySetInnerHTML={{
                 __html: `
         @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@400;700;900&display=swap');
@@ -31,7 +36,7 @@ export default function Prototype2() {
         @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
         .proto-root {
-            --primary: #f97316;
+            --primary: ${primaryColor};
             --bg-main: #0a0a0a;
             --border-heavy: #262626;
             --grid-line: #171717;
@@ -110,7 +115,7 @@ export default function Prototype2() {
                     <div className="max-w-4xl border-l-4 border-primary pl-6 md:pl-10">
                         <div className="inline-block bg-primary text-black text-[10px] font-bold px-2 py-0.5 mb-4">STATUS: ONLINE</div>
                         <h1 className="text-5xl md:text-8xl font-black header-text text-white leading-none mb-4">
-                            MARCOS<br />VELASCO
+                            MARCOS<br />Hello world
                         </h1>
                         <p className="text-lg md:text-2xl font-light text-neutral-400 mb-8 max-w-2xl leading-tight">
                             <span className="text-white font-bold">TECHNICAL VIRTUOSO</span> <br />

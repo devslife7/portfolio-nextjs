@@ -5,15 +5,15 @@ import Projects from "@/components/projects"
 import Contact from "@/components/contact"
 
 export default function Home() {
-  return (
-    <>
-      <Hero />
-      <Projects />
-      <Skills />
-      <About />
-      <Contact />
+    return (
+        <>
+            <Hero />
+            <Projects />
+            <Skills />
+            <About />
+            <Contact />
 
-      <div>hello</div>
-    </>
-  )
+            <div>hello</div>
+        </>
+    )
 }
