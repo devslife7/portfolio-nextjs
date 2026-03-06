@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  other: { "theme-color": "#0a0a0a" },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
