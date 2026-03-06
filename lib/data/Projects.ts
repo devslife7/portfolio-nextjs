@@ -1,5 +1,5 @@
 export const companyTools = {
-  title: "Special Cocktails",
+  title: "Internal Tools DC",
   lightTheme: true,
   flipped: true,
   mobile: false,

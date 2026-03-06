@@ -18,8 +18,8 @@ export default function Prototype2() {
 
     const projects = [
         {
-            alt: 'Cocktail App', src: '/companyTools.gif',
-            title: 'Special Cocktails',
+            alt: 'Cocktail App', src: '/companytools.webp',
+            title: 'Internal Tools DC',
             badge: { text: 'FEATURED', className: 'border-featured text-featured' },
             type: 'B2B Utility', stack: 'React / G-Sheets', metric: 'Real-time Calc', core: 'PDF Automation',
             description: 'Batching tool for bartenders. Calculates large-scale quantities and generates reports from custom recipes.',
@@ -28,7 +28,7 @@ export default function Prototype2() {
             categories: ['featured', 'tools'],
         },
         {
-            alt: 'Construction Website', src: '/dsbgeneral.webp',
+            alt: 'Construction Website', src: '/dsbgeneralv3.webp',
             title: 'DSB Construction',
             badge: { text: 'MAINTENANCE', className: 'border-maintenance text-maintenance' },
             type: 'Enterprise Showcase', stack: 'Next.js / Postgres', metric: 'SSR Validation', core: 'Review CRUD',
@@ -38,7 +38,7 @@ export default function Prototype2() {
             categories: ['featured', 'commercial'],
         },
         {
-            alt: 'Daycare Website', src: '/cdcdaycare.webp',
+            alt: 'Daycare Website', src: '/cdcdaycarev3.webp',
             title: 'CDC DayCare',
             badge: { text: 'COMPLETED', className: 'border-green-500 text-green-500' },
             type: 'CMS Portal', stack: 'Next.js / Tailwind', metric: 'Multi-Language', core: 'Lead Capture',
@@ -79,7 +79,7 @@ export default function Prototype2() {
             categories: ['legacy'],
         },
         {
-            alt: 'JP Home Service', src: '/jphomeservice.png',
+            alt: 'JP Home Service', src: '/jphomeservicev2.webp',
             title: 'JP Home Services',
             badge: { text: 'MAINTENANCE', className: 'border-maintenance text-maintenance' },
             type: 'Commercial Site', stack: 'Next.js / Tailwind', metric: 'Multi-Service', core: 'Lead Capture',
@@ -89,14 +89,14 @@ export default function Prototype2() {
             categories: ['featured', 'commercial'],
         },
         {
-            alt: 'Sams Inn Restaurant', src: '/samsinnrestaurant.png',
+            alt: 'Sams Inn Restaurant', src: '/samsinnrestaurantv2.webp',
             title: "Sam's Inn Restaurant",
             badge: { text: 'COMPLETED', className: 'border-green-500 text-green-500' },
             type: 'Restaurant Site', stack: 'Next.js / Tailwind', metric: 'Mobile-First', core: 'Lead Capture',
             description: "Restaurant website for Sam's Inn featuring menu showcase, location info, and a clean mobile-first design.",
             demo: 'https://samsinnrestaurant.com/',
             source: 'private',
-            categories: ['commercial'],
+            categories: ['featured', 'commercial'],
         },
     ]
 
@@ -244,7 +244,7 @@ export default function Prototype2() {
                         <div className="max-w-4xl border-l-4 border-primary pl-6 md:pl-10">
                             <div className="inline-block bg-primary text-black text-[10px] font-bold px-2 py-0.5 mb-4">STATUS: ONLINE</div>
                             <h1 className="text-5xl md:text-8xl font-black header-text text-white leading-none mb-4">
-                                MARCOS<br />Hello world
+                                MARCOS<br />VELASCO
                             </h1>
                             <p className="text-lg md:text-2xl font-light text-neutral-400 mb-8 max-w-2xl leading-tight">
                                 <span className="text-white font-bold">TECHNICAL VIRTUOSO</span> <br />

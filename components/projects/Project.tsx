@@ -57,7 +57,7 @@ export default function Project(props: any) {
           "flex flex-wrap sm:justify-center lg:flex-nowrap my-container lg:justify-between py-12 sm:py-28 gap-4",
           {
             "lg:flex-row-reverse sm:gap-16": flipped,
-            "sm:gap-20 lg:gap-24": title === "Special Cocktails",
+            "sm:gap-20 lg:gap-24": title === "Internal Tools DC",
           }
         )}
       >
@@ -98,7 +98,7 @@ export default function Project(props: any) {
             "max-w-[300px] m-auto": mobile,
           })}
         >
-          {title === "Special Cocktails" ? (
+          {title === "Internal Tools DC" ? (
             <LaptopMockup className="w-full">
               <Image
                 src={projectGif}
