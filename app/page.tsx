@@ -2,14 +2,9 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
-import resolveConfig from 'tailwindcss/resolveConfig';
-import tailwindConfig from '../tailwind.config.js';
 import { Toaster, toast } from 'sonner';
 import sendMessage from '@/actions/contact';
 import { ContactFormSchema } from '@/lib/validators/contact-form';
-
-const { theme } = resolveConfig(tailwindConfig);
-const primaryColor = (theme.colors as any).primary.DEFAULT as string;
 
 export default function Prototype2() {
     const formRef = useRef<HTMLFormElement>(null)
@@ -194,8 +189,10 @@ export default function Prototype2() {
             }),
             { threshold: 0.1 }
         );
-        document.querySelectorAll('.reveal:not(.visible), .reveal-left:not(.visible), .reveal-right:not(.visible)').forEach(el => observer.observe(el));
-        return () => observer.disconnect();
+        const raf = requestAnimationFrame(() => {
+            document.querySelectorAll('#projects .reveal').forEach(el => observer.observe(el));
+        });
+        return () => { cancelAnimationFrame(raf); observer.disconnect(); };
     }, [activeTab]);
 
     return (
@@ -204,16 +201,12 @@ export default function Prototype2() {
             <div className="proto-root bg-[#0a0a0a] text-[#d4d4d4] antialiased selection:bg-primary selection:text-black min-h-screen font-mono">
                 <style dangerouslySetInnerHTML={{
                     __html: `
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@400;700;900&display=swap');
-        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
-        @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
-
         .proto-root {
-            --primary: ${primaryColor};
+            --primary: #00FF2B;
             --bg-main: #0a0a0a;
             --border-heavy: #262626;
             --grid-line: #171717;
-            font-family: 'JetBrains Mono', monospace;
+            font-family: var(--font-jetbrains-mono), monospace;
         }
         .proto-root .brutalist-border {
             border: 2px solid var(--border-heavy);
@@ -225,7 +218,7 @@ export default function Prototype2() {
             background-size: 40px 40px;
         }
         .proto-root .header-text {
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-inter), sans-serif;
             text-transform: uppercase;
             letter-spacing: -0.05em;
         }
@@ -350,8 +343,8 @@ export default function Prototype2() {
                                     View Projects <span className="arrow-bounce">↓</span>
                                 </a>
                                 <div className="flex gap-4">
-                                    <a className="text-neutral-500 hover:text-white" href="https://github.com/devslife7" target="_blank" rel="noopener noreferrer"><i className="fab fa-github text-xl"></i></a>
-                                    <a className="text-neutral-500 hover:text-white" href="https://www.linkedin.com/in/marcosvelasco/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin text-xl"></i></a>
+                                    <a className="text-neutral-500 hover:text-white" href="https://github.com/devslife7" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg className="text-xl" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+                                    <a className="text-neutral-500 hover:text-white" href="https://www.linkedin.com/in/marcosvelasco/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg className="text-xl" width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
                                 </div>
                             </div>
                         </div>
@@ -369,6 +362,7 @@ export default function Prototype2() {
                 <section className="py-20 bg-black" id="projects"
                     onTouchStart={handleTouchStart}
                     onTouchEnd={handleTouchEnd}
+                    style={{ touchAction: 'pan-y' }}
                 >
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="reveal flex justify-between items-end mb-6 border-b-2 border-neutral-900 pb-4">
@@ -394,11 +388,11 @@ export default function Prototype2() {
                             ))}
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 bg-neutral-900 brutalist-border overflow-hidden" style={{ gap: '1px' }}>
+                        <div key={activeTab} className="grid grid-cols-1 md:grid-cols-2 bg-neutral-900 brutalist-border overflow-hidden" style={{ gap: '1px' }}>
                             {filteredProjects.map((project, index) => (
                                 <div key={project.title} className="reveal bg-black p-6 group hover:bg-neutral-950 transition-colors" style={{ transitionDelay: `${index * 80}ms` }}>
                                     <div className="aspect-video mb-6 overflow-hidden border border-neutral-800">
-                                        <img alt={project.alt} className={`w-full h-full transition-all duration-500 ${project.imgFit ?? 'object-cover'}`} src={project.src} />
+                                        <img alt={project.alt} className={`w-full h-full transition-all duration-500 ${project.imgFit ?? 'object-cover'}`} src={project.src} loading={index < 2 ? 'eager' : 'lazy'} />
                                     </div>
                                     <div className="flex justify-between items-start mb-4">
                                         <h3 className="text-xl font-bold text-white header-text">{project.title}</h3>
@@ -417,8 +411,8 @@ export default function Prototype2() {
                                         )}
                                         {project.source && (
                                             project.source === 'private'
-                                                ? <span className="text-xs font-bold uppercase text-neutral-600 flex items-center gap-1 cursor-default"><i className="fab fa-github"></i> Private</span>
-                                                : <a className="text-xs font-bold uppercase text-neutral-500 hover:text-white flex items-center gap-1" href={project.source} target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i> Source</a>
+                                                ? <span className="text-xs font-bold uppercase text-neutral-600 flex items-center gap-1 cursor-default"><svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Private</span>
+                                                : <a className="text-xs font-bold uppercase text-neutral-500 hover:text-white flex items-center gap-1" href={project.source} target="_blank" rel="noopener noreferrer"><svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg> Source</a>
                                         )}
                                     </div>
                                 </div>
@@ -613,9 +607,9 @@ export default function Prototype2() {
                             <div className="flex flex-col gap-3">
                                 <div className="text-sm font-semibold uppercase tracking-widest text-neutral-500">Connect</div>
                                 <div className="flex gap-4 text-2xl text-neutral-400">
-                                    <a className="hover:text-primary transition-colors" href="https://github.com/devslife7" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i className="fab fa-github"></i></a>
-                                    <a className="hover:text-primary transition-colors" href="https://www.linkedin.com/in/marcosvelasco/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fab fa-linkedin"></i></a>
-                                    <a className="hover:text-primary transition-colors" href="https://www.facebook.com/marcos.velasco.5/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fab fa-facebook"></i></a>
+                                    <a className="hover:text-primary transition-colors" href="https://github.com/devslife7" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg></a>
+                                    <a className="hover:text-primary transition-colors" href="https://www.linkedin.com/in/marcosvelasco/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                                    <a className="hover:text-primary transition-colors" href="https://www.facebook.com/marcos.velasco.5/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
                                 </div>
                                 <p className="text-neutral-500 text-xs mt-2 leading-relaxed">
                                     Open to new opportunities and collaborations. Feel free to reach out!
