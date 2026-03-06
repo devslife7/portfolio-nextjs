@@ -317,7 +317,7 @@ export default function Prototype2() {
                                 <div className="bg-black p-6 flex flex-col items-center justify-center text-center border border-dashed border-neutral-800 min-h-[400px]">
                                     <span className="material-symbols-outlined text-neutral-700 text-5xl mb-4">pending</span>
                                     <p className="text-xs font-bold text-neutral-600 uppercase tracking-widest">More_Projects</p>
-                                    <p className="text-[10px] text-neutral-700 mt-2 font-mono">// Currently in development</p>
+                                    <p className="text-[10px] text-neutral-700 mt-2 font-mono">{"// Currently in development"}</p>
                                 </div>
                             )}
                         </div>
@@ -371,7 +371,7 @@ export default function Prototype2() {
                 <section className="py-24 bg-black overflow-hidden" id="about">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-16 items-center">
                         <div>
-                            <div className="text-[10px] font-bold text-neutral-600 mb-2">// BIOS_INIT</div>
+                            <div className="text-[10px] font-bold text-neutral-600 mb-2">{"// BIOS_INIT"}</div>
                             <h2 className="text-3xl font-black header-text text-white mb-6">About_Developer</h2>
                             <div className="space-y-4 text-neutral-400 text-sm leading-relaxed">
                                 <p>
@@ -391,12 +391,12 @@ export default function Prototype2() {
                             <div className="absolute -top-3 -right-3 bg-primary text-black text-[10px] font-bold px-2 py-0.5">ENTITY_ID: 10443</div>
                             <div className="font-mono text-[11px] leading-6">
                                 <p className="text-primary font-bold">const dev = {'{'}</p>
-                                <p className="pl-4">name: "Marcos Velasco",</p>
-                                <p className="pl-4">role: "Full Stack Developer",</p>
-                                <p className="pl-4">focus: ["Performance", "Scalability", "Utility"],</p>
-                                <p className="pl-4">location: "Alexandria, VA",</p>
-                                <p className="pl-4">languages: ["ES6", "Ruby", "SQL", "TS"],</p>
-                                <p className="pl-4">passion: "Solving Complex Inefficiencies"</p>
+                                <p className="pl-4">name: &quot;Marcos Velasco&quot;,</p>
+                                <p className="pl-4">role: &quot;Full Stack Developer&quot;,</p>
+                                <p className="pl-4">focus: [&quot;Performance&quot;, &quot;Scalability&quot;, &quot;Utility&quot;],</p>
+                                <p className="pl-4">location: &quot;Alexandria, VA&quot;,</p>
+                                <p className="pl-4">languages: [&quot;ES6&quot;, &quot;Ruby&quot;, &quot;SQL&quot;, &quot;TS&quot;],</p>
+                                <p className="pl-4">passion: &quot;Solving Complex Inefficiencies&quot;</p>
                                 <p className="text-primary font-bold">{'}'};</p>
                             </div>
                         </div>
