@@ -123,11 +123,11 @@ export default function Prototype2() {
                         </p>
                         <div className="flex flex-wrap gap-4 items-center">
                             <a className="px-6 py-3 bg-white text-black font-bold uppercase text-sm hover:bg-primary transition-colors" href="#projects">
-                                View manifest
+                                View manifest ↓
                             </a>
                             <div className="flex gap-4">
-                                <a className="text-neutral-500 hover:text-white" href="#"><i className="fab fa-github text-xl"></i></a>
-                                <a className="text-neutral-500 hover:text-white" href="#"><i className="fab fa-linkedin text-xl"></i></a>
+                                <a className="text-neutral-500 hover:text-white" href="https://github.com/devslife7" target="_blank" rel="noopener noreferrer"><i className="fab fa-github text-xl"></i></a>
+                                <a className="text-neutral-500 hover:text-white" href="https://www.linkedin.com/in/marcosvelasco/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin text-xl"></i></a>
                             </div>
                         </div>
                     </div>
@@ -297,8 +297,8 @@ export default function Prototype2() {
                             </p>
                         </div>
                         <div className="mt-8">
-                            <a className="inline-block brutalist-border px-8 py-3 font-bold uppercase text-xs hover:bg-white hover:text-black transition-all" href="#">
-                                Download_Manifest (CV)
+                            <a className="inline-block brutalist-border px-8 py-3 font-bold uppercase text-xs hover:bg-white hover:text-black transition-all" href="https://docs.google.com/document/d/17uI6lYjB1E6AioHoP3Cc6fBPmfFkutp2KXSefHKYsa8/edit?tab=t.0" target="_blank" rel="noopener noreferrer">
+                                Download_Manifest (CV) ↗
                             </a>
                         </div>
                     </div>
