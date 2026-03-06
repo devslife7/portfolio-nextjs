@@ -301,6 +301,12 @@ export default function Prototype2() {
           opacity: 1;
           transform: none;
         }
+        @media (max-width: 767px) {
+          .project-card.reveal {
+            opacity: 1;
+            transform: none;
+          }
+        }
       `}} />
 
                 <nav className="fixed w-full z-50 bg-black border-b-2 border-neutral-900">
@@ -390,7 +396,7 @@ export default function Prototype2() {
 
                         <div key={activeTab} className="grid grid-cols-1 md:grid-cols-2 bg-neutral-900 brutalist-border overflow-hidden" style={{ gap: '1px' }}>
                             {filteredProjects.map((project, index) => (
-                                <div key={project.title} className="reveal bg-black p-6 group hover:bg-neutral-950 transition-colors" style={{ transitionDelay: `${index * 80}ms` }}>
+                                <div key={project.title} className="reveal project-card bg-black p-6 group hover:bg-neutral-950 transition-colors" style={{ transitionDelay: `${index * 80}ms` }}>
                                     <div className="aspect-video mb-6 overflow-hidden border border-neutral-800">
                                         <img alt={project.alt} className={`w-full h-full transition-all duration-500 ${project.imgFit ?? 'object-cover'}`} src={project.src} loading={index < 2 ? 'eager' : 'lazy'} />
                                     </div>
@@ -418,7 +424,7 @@ export default function Prototype2() {
                                 </div>
                             ))}
                             {filteredProjects.length % 2 !== 0 && (
-                                <div className="bg-black p-6 flex flex-col items-center justify-center text-center border border-dashed border-neutral-800 min-h-[400px]">
+                                <div className="hidden md:flex bg-black p-6 flex-col items-center justify-center text-center border border-dashed border-neutral-800 min-h-[400px]">
                                     <span className="material-symbols-outlined text-neutral-700 text-5xl mb-4">pending</span>
                                     <p className="text-xs font-bold text-neutral-600 uppercase tracking-widest">More_Projects</p>
                                     <p className="text-[10px] text-neutral-700 mt-2 font-mono">{"// Currently in development"}</p>
