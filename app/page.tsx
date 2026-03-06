@@ -20,17 +20,17 @@ export default function Prototype2() {
         {
             alt: 'Cocktail App', src: '/companyTools.gif',
             title: 'Special Cocktails',
-            badge: { text: 'FEATURED', className: 'border-green-500 text-green-500' },
+            badge: { text: 'FEATURED', className: 'border-featured text-featured' },
             type: 'B2B Utility', stack: 'React / G-Sheets', metric: 'Real-time Calc', core: 'PDF Automation',
             description: 'Batching tool for bartenders. Calculates large-scale quantities and generates reports from custom recipes.',
             demo: 'https://companytools.vercel.app/',
-            source: 'https://github.com/devslife7/companytools',
+            source: 'private',
             categories: ['featured', 'tools'],
         },
         {
             alt: 'Construction Website', src: '/dsbgeneral.webp',
             title: 'DSB Construction',
-            badge: { text: 'MAINTENANCE', className: 'border-primary text-primary' },
+            badge: { text: 'MAINTENANCE', className: 'border-maintenance text-maintenance' },
             type: 'Enterprise Showcase', stack: 'Next.js / Postgres', metric: 'SSR Validation', core: 'Review CRUD',
             description: 'Business portal with admin media handling and server-side validation for customer interactions.',
             demo: 'https://dsbgeneralconstruction.vercel.app/',
@@ -50,7 +50,7 @@ export default function Prototype2() {
         {
             alt: 'Soccer App', src: 'https://media.giphy.com/media/HeeRZi4hagLEl3qPIY/giphy.gif',
             title: 'FutFriends',
-            badge: { text: 'LEGACY', className: 'border-yellow-500 text-yellow-500' },
+            badge: { text: 'LEGACY', className: 'border-legacy text-legacy' },
             type: 'Social Platform', stack: 'Rails / React', metric: 'JWT Secure', core: 'REST API',
             description: 'Match-finding platform for football enthusiasts. Custom database schema with complex user relationships.',
             demo: null,
@@ -60,7 +60,7 @@ export default function Prototype2() {
         {
             alt: 'ProTaskr App', src: 'https://media.giphy.com/media/0amLFjL4e8V4c05NBH/giphy.gif',
             title: 'proTaskr',
-            badge: { text: 'LEGACY', className: 'border-yellow-500 text-yellow-500' },
+            badge: { text: 'LEGACY', className: 'border-legacy text-legacy' },
             type: 'Task Manager', stack: 'Rails / React', metric: 'JWT Secure', core: 'Full CRUD',
             description: 'Helps your teams organize, track, and manage their work. Built with a custom REST API and multi-user authentication.',
             demo: null,
@@ -71,7 +71,7 @@ export default function Prototype2() {
             alt: 'Qatar 2022 Tracker', src: 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNzE3MGMxOWE1ZWM3MmVjNjJlYzcwZmNmMTJlOTA2ZDdjODVlNDk2YyZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/iRTgPcLFK51zGgoUvw/giphy.gif',
             imgFit: 'object-contain',
             title: 'Qatar 2022',
-            badge: { text: 'LEGACY', className: 'border-green-500 text-green-500' },
+            badge: { text: 'LEGACY', className: 'border-legacy text-legacy' },
             type: 'Live Tracker', stack: 'React / API', metric: '120 daily visits', core: 'Real-time Data',
             description: 'World Cup 2022 match tracker with real-time results via API-FOOTBALL. Peaked at 120+ visits per day during the tournament.',
             demo: 'https://main.d311px3iblll1g.amplifyapp.com/',
@@ -81,12 +81,22 @@ export default function Prototype2() {
         {
             alt: 'JP Home Service', src: '/jphomeservice.png',
             title: 'JP Home Services',
-            badge: { text: 'MAINTENANCE', className: 'border-green-500 text-green-500' },
+            badge: { text: 'MAINTENANCE', className: 'border-maintenance text-maintenance' },
             type: 'Commercial Site', stack: 'Next.js / Tailwind', metric: 'Multi-Service', core: 'Lead Capture',
             description: 'Professional home remodeling website for a Virginia/DC/MD contractor. Features service showcase, contact section with Google Maps, and mobile-first responsive design.',
             demo: 'https://www.jphomeservice.org/',
             source: 'https://github.com/devslife7/jphomeservice',
             categories: ['featured', 'commercial'],
+        },
+        {
+            alt: 'Sams Inn Restaurant', src: '/samsinnrestaurant.png',
+            title: "Sam's Inn Restaurant",
+            badge: { text: 'COMPLETED', className: 'border-green-500 text-green-500' },
+            type: 'Restaurant Site', stack: 'Next.js / Tailwind', metric: 'Mobile-First', core: 'Lead Capture',
+            description: "Restaurant website for Sam's Inn featuring menu showcase, location info, and a clean mobile-first design.",
+            demo: 'https://samsinnrestaurant.com/',
+            source: 'private',
+            categories: ['commercial'],
         },
     ]
 
@@ -129,9 +139,9 @@ export default function Prototype2() {
     useEffect(() => {
         // Smooth scrolling logic
         document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', (e) => {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
+                const targetId = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
                 if (targetId && targetId !== '#') {
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
@@ -308,7 +318,9 @@ export default function Prototype2() {
                                             <a className="text-xs font-bold uppercase border border-white px-4 py-2 hover:bg-white hover:text-black transition-all" href={project.demo} target="_blank" rel="noopener noreferrer">Demo</a>
                                         )}
                                         {project.source && (
-                                            <a className="text-xs font-bold uppercase text-neutral-500 hover:text-white flex items-center gap-1" href={project.source} target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i> Source</a>
+                                            project.source === 'private'
+                                                ? <span className="text-xs font-bold uppercase text-neutral-600 flex items-center gap-1 cursor-default"><i className="fab fa-github"></i> Private</span>
+                                                : <a className="text-xs font-bold uppercase text-neutral-500 hover:text-white flex items-center gap-1" href={project.source} target="_blank" rel="noopener noreferrer"><i className="fab fa-github"></i> Source</a>
                                         )}
                                     </div>
                                 </div>
