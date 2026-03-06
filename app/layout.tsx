@@ -5,8 +5,11 @@ import "./globals.css"
 const ubuntu = Ubuntu({ subsets: ["latin"], weight: ["300", "400", "500", "700"] })
 
 export const metadata: Metadata = {
-  title: "Marcos' Portfolio",
+  title: "mv.virtual",
   description: "Personal portfolio of projects.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
