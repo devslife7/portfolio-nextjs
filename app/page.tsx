@@ -252,7 +252,7 @@ export default function Prototype2() {
                             </p>
                             <div className="flex flex-wrap gap-4 items-center">
                                 <a className="px-6 py-3 bg-white text-black font-bold uppercase text-sm hover:bg-primary transition-colors" href="#projects">
-                                    View manifest ↓
+                                    View Projects ↓
                                 </a>
                                 <div className="flex gap-4">
                                     <a className="text-neutral-500 hover:text-white" href="https://github.com/devslife7" target="_blank" rel="noopener noreferrer"><i className="fab fa-github text-xl"></i></a>
