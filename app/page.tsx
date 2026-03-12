@@ -15,7 +15,17 @@ export default function Prototype2() {
 
     const projects = [
         {
-            alt: 'Cocktail App', src: '/companytools.webp',
+            alt: 'FIFA World Cup 2026 Predictor', src: '/fifacup26.webp',
+            title: 'FIFA World Cup 2026 Predictor',
+            badge: { text: 'FEATURED', className: 'border-featured text-featured' },
+            type: 'Sports Predictor', stack: 'Next.js / Tailwind', metric: 'Real-time Brackets', core: 'Match Predictions',
+            description: 'World Cup 2026 match predictor. Lets users forecast every game of the tournament with an interactive bracket system, live updates, and lets you compare your predictions with your friends.',
+            demo: 'https://fifacup26.vercel.app/',
+            source: 'https://github.com/devslife7/fifacup26',
+            categories: ['featured'],
+        },
+        {
+            alt: 'Cocktail App', src: '/internaltoolsdc.webp',
             title: 'Internal Tools DC',
             badge: { text: 'FEATURED', className: 'border-featured text-featured' },
             type: 'B2B Utility', stack: 'React / G-Sheets', metric: 'Real-time Calc', core: 'PDF Automation',
