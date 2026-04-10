@@ -105,6 +105,16 @@ export default function Prototype2() {
             source: 'private',
             categories: ['featured', 'commercial'],
         },
+        {
+            alt: 'Anywhere Auto Repair', src: '/anywhereautorepair.webp',
+            title: 'Anywhere Auto Repair',
+            badge: { text: 'FEATURED', className: 'border-featured text-featured' },
+            type: 'Commercial Site', stack: 'Next.js / Tailwind', metric: 'Mobile-First', core: 'Lead Capture',
+            description: 'Auto repair business website featuring services showcase, contact information, and a mobile-first responsive design.',
+            demo: 'https://anywhereautorepair.net',
+            source: 'https://github.com/devslife7/aamechanic',
+            categories: ['featured', 'commercial'],
+        },
     ]
 
     const tabs = ['all', 'featured', 'commercial', 'tools', 'legacy'] as const
