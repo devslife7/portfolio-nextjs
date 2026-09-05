@@ -15,13 +15,14 @@ export default function Prototype2() {
 
     const projects = [
         {
-            alt: 'FIFA World Cup 2026 Predictor', src: '/fifacup26.webp',
+            alt: 'FIFA World Cup 2026 Predictor mobile home screen', src: '/fifacup26.webp?v=20260905-mobile-home',
+            imgFit: 'object-contain',
             title: 'FIFA World Cup 2026 Predictor',
             badge: { text: 'FEATURED', className: 'border-featured text-featured' },
             type: 'Sports Predictor', stack: 'Next.js / Tailwind', metric: 'Real-time Brackets', core: 'Match Predictions',
             description: 'World Cup 2026 match predictor. Lets users forecast every game of the tournament with an interactive bracket system, live updates, and lets you compare your predictions with your friends.',
             demo: 'https://fifacup26.vercel.app/',
-            source: 'https://github.com/devslife7/fifacup26',
+            source: 'https://github.com/devslife7/fifa26',
             categories: ['featured'],
         },
         {
