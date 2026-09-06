@@ -15,12 +15,12 @@ export default function Prototype2() {
 
     const projects = [
         {
-            alt: 'FIFA World Cup 2026 Predictor mobile home screen', src: '/fifacup26.webp?v=20260905-mobile-home',
+            alt: 'FIFA World Cup 2026 Predictor desktop home screen', src: '/fifacup26.webp?v=20260906-current-home',
             imgFit: 'object-contain',
             title: 'FIFA World Cup 2026 Predictor',
             badge: { text: 'FEATURED', className: 'border-featured text-featured' },
             type: 'Sports Predictor', stack: 'Next.js / Tailwind', metric: 'Real-time Brackets', core: 'Match Predictions',
-            description: 'World Cup 2026 match predictor. Lets users forecast every game of the tournament with an interactive bracket system, live updates, and lets you compare your predictions with your friends.',
+            description: 'Predict World Cup 2026 matches, track your bracket, and compare scores with friends.',
             demo: 'https://fifacup26.vercel.app/',
             source: 'https://github.com/devslife7/fifa26',
             categories: ['featured'],
@@ -401,17 +401,17 @@ export default function Prototype2() {
                                             <img alt={project.alt} className={`w-full h-full transition-all duration-500 ${project.imgFit ?? 'object-cover'}`} src={project.src} loading={index < 2 ? 'eager' : 'lazy'} />
                                         </div>
                                     )}
-                                    <div className="flex justify-between items-start mb-4">
+                                    <div className="flex justify-between items-start gap-3 mb-3">
                                         <h3 className="text-xl font-bold text-white header-text">{project.title}</h3>
                                         <span className={`text-[10px] font-bold border px-2 py-0.5 ${project.badge.className}`}>{project.badge.text}</span>
                                     </div>
+                                    <p className="font-sans text-base leading-relaxed text-neutral-300 mb-6">{project.description}</p>
                                     <div className="grid grid-cols-2 gap-4 text-[10px] font-mono mb-6 uppercase text-neutral-500">
                                         <div><span className="text-white block">TYPE:</span> {project.type}</div>
                                         <div><span className="text-white block">STACK:</span> {project.stack}</div>
                                         <div><span className="text-white block">METRIC:</span> {project.metric}</div>
                                         <div><span className="text-white block">CORE:</span> {project.core}</div>
                                     </div>
-                                    <p className="text-sm text-neutral-400 mb-6 line-clamp-2">{project.description}</p>
                                     <div className="flex gap-4">
                                         {project.demo && (
                                             <a className="text-xs font-bold uppercase border border-white px-4 py-2 hover:bg-white hover:text-black transition-all" href={project.demo} target="_blank" rel="noopener noreferrer">Demo</a>
