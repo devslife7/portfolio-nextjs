@@ -56,6 +56,17 @@ export default function Prototype2() {
             categories: ['commercial'],
         },
         {
+            alt: 'Copa América USA 2024 tournament artwork', src: '/copaamerica24.webp',
+            imgFit: 'object-contain',
+            title: 'Copa América 2024',
+            badge: { text: 'LEGACY', className: 'border-legacy text-legacy' },
+            type: 'Sports Predictor', stack: 'Next.js / Tailwind', metric: '2024 Tournament', core: 'Match Predictions',
+            description: 'Copa América 2024 predictions app for following the tournament and viewing participant predictions.',
+            demo: 'https://copaamerica24.vercel.app/',
+            source: null,
+            categories: ['legacy'],
+        },
+        {
             alt: 'Soccer App', src: 'https://media.giphy.com/media/HeeRZi4hagLEl3qPIY/giphy.gif',
             title: 'FutFriends',
             badge: { text: 'LEGACY', className: 'border-legacy text-legacy' },
